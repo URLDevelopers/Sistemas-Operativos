@@ -1,0 +1,6 @@
+﻿  TareaCallbacks.cpp
+TareaCallbacks.cpp(47): warning C4101: 'clsb': variable local sin referencia
+TareaCallbacks.cpp(44): warning C4101: 'clsa': variable local sin referencia
+  AssemblyInfo.obj : /DEBUG:FASTLINK no se admite cuando hay presente código administrado; reiniciando vínculo con /DEBUG:FULL
+  TareaCallbacks.vcxproj -> C:\Users\alvar\Documents\Visual Studio 2015\Projects\TareaCallbacks\Debug\TareaCallbacks.exe
+  TareaCallbacks.vcxproj -> C:\Users\alvar\Documents\Visual Studio 2015\Projects\TareaCallbacks\Debug\TareaCallbacks.pdb (Partial PDB)
