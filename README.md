@@ -1,14 +1,11 @@
-# Sistemas-Operativos
-Repositorio creado para los proyectos de la clase Sistemas Operativos. Primer ciclo 2016. Universidad Rafael Landivar, Guatemala.
+# Sistemas Operativos
+## Grupo 2
+### Universidad Rafael Landívar - Primer Ciclo 2016
 
-1	Juan Carlos Durini	1201613
-
-2	Pablo Cancinos	239413
-
-3	Pablo Queme	1114413
-
-4	Ludwing Cano	1065413
-
-5	Cesar De León	1021713
-
-6	Yoselin Ulin Ortega	1035713
+### Integrantes
+* Juan Carlos Durini - 1201613
+* Pablo Cancinos - 1239413
+* Pablo Queme - 1114413
+* Ludwing Cano - 1065413
+* Cesar De León - 1021713
+* Yoselin Ulin Ortega - 1035713
