@@ -1,0 +1,6 @@
+C:\Users\Pablo\Dropbox\URL\ING EN INFORMATICA Y SISTEMAS\Séptimo Ciclo 2016\Sistemas Operativos\Proyecto 1\SO_1\SO_1\bin\Debug\SO_1.exe.config
+C:\Users\Pablo\Dropbox\URL\ING EN INFORMATICA Y SISTEMAS\Séptimo Ciclo 2016\Sistemas Operativos\Proyecto 1\SO_1\SO_1\bin\Debug\SO_1.exe
+C:\Users\Pablo\Dropbox\URL\ING EN INFORMATICA Y SISTEMAS\Séptimo Ciclo 2016\Sistemas Operativos\Proyecto 1\SO_1\SO_1\bin\Debug\SO_1.pdb
+C:\Users\Pablo\Dropbox\URL\ING EN INFORMATICA Y SISTEMAS\Séptimo Ciclo 2016\Sistemas Operativos\Proyecto 1\SO_1\SO_1\obj\Debug\SO_1.csprojResolveAssemblyReference.cache
+C:\Users\Pablo\Dropbox\URL\ING EN INFORMATICA Y SISTEMAS\Séptimo Ciclo 2016\Sistemas Operativos\Proyecto 1\SO_1\SO_1\obj\Debug\SO_1.exe
+C:\Users\Pablo\Dropbox\URL\ING EN INFORMATICA Y SISTEMAS\Séptimo Ciclo 2016\Sistemas Operativos\Proyecto 1\SO_1\SO_1\obj\Debug\SO_1.pdb

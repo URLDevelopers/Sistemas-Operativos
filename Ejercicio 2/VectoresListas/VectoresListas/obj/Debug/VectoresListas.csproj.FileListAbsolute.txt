@@ -1,0 +1,8 @@
+C:\Users\Pablo\Desktop\Sistemas-Operativos-G2\Ejercicio 2\VectoresListas\VectoresListas\bin\Debug\VectoresListas.exe
+C:\Users\Pablo\Desktop\Sistemas-Operativos-G2\Ejercicio 2\VectoresListas\VectoresListas\bin\Debug\VectoresListas.pdb
+C:\Users\Pablo\Desktop\Sistemas-Operativos-G2\Ejercicio 2\VectoresListas\VectoresListas\obj\Debug\VectoresListas.csprojResolveAssemblyReference.cache
+C:\Users\Pablo\Desktop\Sistemas-Operativos-G2\Ejercicio 2\VectoresListas\VectoresListas\obj\Debug\VectoresListas.Form1.resources
+C:\Users\Pablo\Desktop\Sistemas-Operativos-G2\Ejercicio 2\VectoresListas\VectoresListas\obj\Debug\VectoresListas.Properties.Resources.resources
+C:\Users\Pablo\Desktop\Sistemas-Operativos-G2\Ejercicio 2\VectoresListas\VectoresListas\obj\Debug\VectoresListas.csproj.GenerateResource.Cache
+C:\Users\Pablo\Desktop\Sistemas-Operativos-G2\Ejercicio 2\VectoresListas\VectoresListas\obj\Debug\VectoresListas.exe
+C:\Users\Pablo\Desktop\Sistemas-Operativos-G2\Ejercicio 2\VectoresListas\VectoresListas\obj\Debug\VectoresListas.pdb
