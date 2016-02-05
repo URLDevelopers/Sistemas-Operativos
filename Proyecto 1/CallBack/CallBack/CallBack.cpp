@@ -27,8 +27,7 @@ int main()
 	cout << "Parametro recibido: " << callback2(2) << endl;
 	cout << endl;
 	cout << "Funcion 3" << endl;
-	ClassB *ObjetoB = new ClassB();
-	int(*callback3)(int) = &ObjetoB->AccesoFuncion3;
+	int(*callback3)(int) = &ClassB::AccesoFuncion3;
 	cout << "Parametro recibido: " << callback3(3) << endl;
 	cout << endl;
 	system("pause");

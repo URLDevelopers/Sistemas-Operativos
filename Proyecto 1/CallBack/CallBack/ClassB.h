@@ -1,5 +1,5 @@
 #pragma once
-static class ClassB
+class ClassB
 {
 public:
 	ClassB();
@@ -7,8 +7,8 @@ public:
 	
 	
 	//Funcion no.3 privada en Clase B
-private: int Funcion3(int par);
-public: int AccesoFuncion3(int par);
+private: static int Funcion3(int par);
+public: static int AccesoFuncion3(int par);
 		 
 
 };
