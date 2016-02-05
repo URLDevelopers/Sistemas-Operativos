@@ -1,4 +1,8 @@
-Francisco Manjón Gottlob # 1054113
+﻿Francisco Manjón Gottlob # 1054113
 Kevyn Villatoro # 1011712
 Juan Pablo Velásquez Valenzuela # 1067813
+<<<<<<< HEAD
 Julio Andrés Mejía del Cid # 1026111
+=======
+Ana Ortega Cifuentes # 1041613
+>>>>>>> origin/g6
