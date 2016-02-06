@@ -7,14 +7,14 @@ ClassB::ClassB()
 	
 }
 
-int ClassB::Funcion3(int par)
+void ClassB::SetCB3(int(ClassB::*&fun)(int))
 {
-	return par;
+	fun = &ClassB::Funcion3;
 }
 
-int ClassB::AccesoFuncion3(int par)
+int ClassB::Funcion3(int par) //Private function
 {
-	return Funcion3(par);
+	return par;
 }
 
 ClassB::~ClassB()

@@ -19,7 +19,7 @@ int main()
 	cout << "Grupo 6" << endl;
 	cout << endl;
 	cout << "Funcion 1" << endl;
-	int(*callback1)(int) = &Funcion1;
+	int(*callback1)(int) = &Funcion1; //cout para ver la posicion de memoria
 	cout << "Parametro recibido: " << callback1(1) << endl;
 	cout << endl;
 	cout << "Funcion 2" << endl;
@@ -27,8 +27,10 @@ int main()
 	cout << "Parametro recibido: " << callback2(2) << endl;
 	cout << endl;
 	cout << "Funcion 3" << endl;
-	int(*callback3)(int) = &ClassB::AccesoFuncion3;
-	cout << "Parametro recibido: " << callback3(3) << endl;
+	int(ClassB::*callback3)(int);
+	ClassB *Objb = new ClassB();
+	Objb->SetCB3(callback3);
+	cout << "Parametro recibido: " << (Objb->*callback3)(3) << endl;
 	cout << endl;
 	system("pause");
     return 0;
