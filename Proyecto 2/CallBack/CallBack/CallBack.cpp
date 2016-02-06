@@ -8,29 +8,33 @@
 
 using namespace std;
 
+void *Table [10];
+
+
 //Funcion no. 1 estatica en todo el programa
 static int Funcion1(int par)
 {
 	return par;
 }
 
+bool RegistroDisponible(int pos)
+{
+	if (Table[pos] == 0)
+	{
+		return true;
+	}
+	return false;
+}
+
+void LiberarRegistro(int pos)
+{
+	Table[pos] = 0;
+}
+
 int main()
 {
 	cout << "Grupo 6" << endl;
-	cout << endl;
-	cout << "Funcion 1" << endl;
-	int(*callback1)(int) = &Funcion1; //cout para ver la posicion de memoria
-	cout << "Parametro recibido: " << callback1(1) << endl;
-	cout << endl;
-	cout << "Funcion 2" << endl;
-	int(*callback2)(int) = &ClassA::Funcion2;
-	cout << "Parametro recibido: " << callback2(2) << endl;
-	cout << endl;
-	cout << "Funcion 3" << endl;
-	int(ClassB::*callback3)(int);
-	ClassB *Objb = new ClassB();
-	Objb->SetCB3(callback3);
-	cout << "Parametro recibido: " << (Objb->*callback3)(3) << endl;
+
 	cout << endl;
 	system("pause");
     return 0;
