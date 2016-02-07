@@ -46,17 +46,35 @@ void ClassB::setCallBack(int (ClassB::*&cb)(int))
 	cb = &ClassB::function3;
 }
 
+int *DATA;
+
 int main()
 {
-	int(*callback1)(int) = &function1;
-	int(*callback2)(int) = &ClassA::function2;
+	typedef int(*CallBack)(int);
+	typedef int(ClassB::*CallBackB)(int);
+
+	DATA = 0;
+	CallBack callback1 = &function1;
+	CallBack callback2 = &ClassA::function2;
 	ClassB *obj = new ClassB();
-	int (ClassB::*callback3)(int);
+	CallBackB callback3;
 	ClassB::setCallBack(callback3);
 
 	callback1(1);
 	callback2(2);
 	(obj->*callback3)(3);
+
+	int *vec[10];
+	vec[0] = (int*)&callback1;
+	vec[1] = (int*)&callback2;
+	vec[2] = (int*)&callback3;
+
+	CallBack cb1 = (CallBack)**(&vec[0]);
+	CallBack cb2 = (CallBack)**(&vec[1]);
+	CallBackB *x = (CallBackB*)(vec[2]);
+	cb1(4);
+	cb2(5);
+	(obj->**x)(6);
 
 	system("pause >nul");
     return 0;
