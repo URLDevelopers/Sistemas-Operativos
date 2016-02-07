@@ -20,13 +20,13 @@ class claseB
 {
 
 	public:
-		static int calling_function(int param)
+		static void calling_function(int (claseB::*&mem)(int))
 		{
-			return function(param);
+			mem = &function;
 		}
 
 	private:
-		static int function(int param)
+		int function(int param)
 		{
 			printf("Funcion 3: privada en clase B\n");
 			printf(" - Se mando el valor: %d\n", param);
@@ -41,25 +41,68 @@ static int function(int param)
 	return param;
 }
 
+
+void initializateArray(void *theArray[])
+{
+	for (int i = 0; i < 10; i++)
+	{
+		theArray[i] = NULL;
+	}
+}
+
+void setPosition(int (*param)(int),void *theArray[]) {
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (theArray[i] == NULL) {
+			theArray[i] = param;
+			return;
+		}
+	}
+}
+
+void recorreVector(void *theArray[])
+{
+	int(*auxCallback) (int);
+	for (int i = 0; i < 10; i++)
+	{
+		if (theArray[i] != NULL)
+		{
+			auxCallback = (int(*)(int))theArray[i];
+			auxCallback((i+1) * 10);
+			theArray[i] = NULL;
+		}
+	}
+}
+
+void *vector[10];
+
 int main()
 {
 
 	int(*PrimerCallback) (int);
 	int(*SegundoCallback) (int);
-	int(*TercerCallback) (int);
+	int(claseB::*TercerCallback) (int);
 
-	PrimerCallback = &function;
+	/*PrimerCallback = &function;
 	PrimerCallback(10);
 
-	claseA clase1;
-	SegundoCallback = &clase1.function;
+	SegundoCallback = &claseA::function;
 	SegundoCallback(20);
-
-	claseB clase2;
-	TercerCallback = &clase2.calling_function;
-	TercerCallback(30);
 	
+	claseB::calling_function(TercerCallback);
+	claseB *objeto = new claseB();
+	(objeto->*TercerCallback)(30);
+	*/
+	initializateArray(vector);
+	
+	setPosition(&function,vector);
+	setPosition(&claseA::function,vector);
+
+	recorreVector(vector);
+	//setPosition(&function);
+	//PrimerCallback = (int(*)(int))vector[0];
+	//PrimerCallback(11);
+
     return 0;
 }
-
-
