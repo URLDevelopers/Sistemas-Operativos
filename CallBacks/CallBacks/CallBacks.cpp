@@ -75,7 +75,7 @@ typedef int(ClassB::*CallBackB)(int);
 #define SUCCESSFUL 0 //Resultado exitoso ->UTILIZADA EN TODAS LAS FUNCIONES<-
 
 //DEFINICION DE CONSTANTES DEL RESULTADO DE AGREGAR UN PROCESO
-#define UNAVALAIBLE 1 //Posicion no disponible para agregar al proceso
+#define UNAVAILABLE 1 //Posicion no disponible para agregar al proceso
 #define OVERFLOW 2 //La cantidad de procesos agregados ha sido alcanzada
 #define OUT_OF_RANGE 3 //El indice para agregar ha sido sobrepasado
 
@@ -155,7 +155,7 @@ private:
 		if (this->pcb[index] != NULL)
 		{
 			if (this->pcb[index]->status != DONE)
-				return UNAVALAIBLE;
+				return UNAVAILABLE;
 			else
 				killProcessAt(index);
 		}
