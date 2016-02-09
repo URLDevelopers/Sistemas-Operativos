@@ -1,8 +1,10 @@
-﻿Build started 6/02/2016 6:13:09 p. m..
+﻿Build started 8/02/2016 2:35:42 p. m..
      1>Project "C:\Users\Daniel Mejia\Documents\Visual Studio 2015\Projects\CallBacks\CallBacks\CallBacks.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\CallBacks.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt CallBacks.cpp
          CallBacks.cpp
+     1>c:\users\daniel mejia\documents\visual studio 2015\projects\callbacks\callbacks\callbacks.cpp(79): warning C4005: 'OVERFLOW': macro redefinition
+         c:\program files (x86)\windows kits\10\include\10.0.10150.0\ucrt\math.h(954): note: see previous definition of 'OVERFLOW'
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Daniel Mejia\Documents\Visual Studio 2015\Projects\CallBacks\Debug\CallBacks.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Daniel Mejia\Documents\Visual Studio 2015\Projects\CallBacks\Debug\CallBacks.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Daniel Mejia\Documents\Visual Studio 2015\Projects\CallBacks\Debug\CallBacks.lib" /MACHINE:X86 Debug\CallBacks.obj
          Debug\stdafx.obj
@@ -11,4 +13,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.32
+Time Elapsed 00:00:03.97
