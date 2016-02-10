@@ -147,6 +147,8 @@
   <ItemGroup>
     <ClInclude Include="ClassA.h" />
     <ClInclude Include="ClassB.h" />
+    <ClInclude Include="Kernel.h" />
+    <ClInclude Include="PCB.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -154,6 +156,8 @@
     <ClCompile Include="CallBack.cpp" />
     <ClCompile Include="ClassA.cpp" />
     <ClCompile Include="ClassB.cpp" />
+    <ClCompile Include="Kernel.cpp" />
+    <ClCompile Include="PCB.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

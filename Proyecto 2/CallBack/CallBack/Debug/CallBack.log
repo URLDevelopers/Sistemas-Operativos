@@ -1,3 +1,2 @@
 ﻿  CallBack.cpp
-c:\users\francisco\documents\github\sistemas-operativos\proyecto 2\callback\callback\callback.cpp(42): warning C4101: 'x': unreferenced local variable
-  CallBack.vcxproj -> C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 2\CallBack\Debug\CallBack.exe
+c:\users\francisco\documents\github\sistemas-operativos\proyecto 2\callback\callback\callback.cpp(28): error C4700: uninitialized local variable 'callback31' used

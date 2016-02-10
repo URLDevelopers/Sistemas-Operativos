@@ -5,10 +5,10 @@ public:
 	ClassB();
 	~ClassB();
 	
-	static void SetCB3(int (ClassB::*&fun)(int));
+	static void SetCB3(int (*funcion)(int));
 
 	//Funcion no.3 privada en Clase B
-private: int Funcion3(int par);
+private: static int Funcion3(int par);
 
 
 		 
