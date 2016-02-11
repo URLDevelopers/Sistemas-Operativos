@@ -1,5 +1,3 @@
-﻿  PROYECTO2.cpp
-c:\users\fernando arbizu\desktop\proyectosso\sistemas-operativos\proyecto2\proyecto2\proyecto2.cpp(95): warning C4305: 'return': truncamiento de 'int' a 'bool'
-c:\users\fernando arbizu\desktop\proyectosso\sistemas-operativos\proyecto2\proyecto2\proyecto2.cpp(104): warning C4305: 'return': truncamiento de 'int' a 'bool'
-c:\users\fernando arbizu\desktop\proyectosso\sistemas-operativos\proyecto2\proyecto2\proyecto2.cpp(135): warning C4305: 'return': truncamiento de 'int' a 'bool'
-  PROYECTO2.vcxproj -> C:\Users\Fernando Arbizu\Desktop\ProyectosSO\Sistemas-Operativos\PROYECTO2\Debug\PROYECTO2.exe
+﻿  stdafx.cpp
+  PROYECTO2.cpp
+  PROYECTO2.vcxproj -> C:\Users\luxjorge\Desktop\PROYECTO2\Debug\PROYECTO2.exe
