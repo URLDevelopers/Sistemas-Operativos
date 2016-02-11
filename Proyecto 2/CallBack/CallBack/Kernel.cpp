@@ -5,6 +5,10 @@
 Kernel::Kernel()
 {
 	ID = 0;
+	for (int i = 0; i < LONG; i++)
+	{
+		Tabla[i] = NULL;
+	}
 }
 
 
@@ -17,7 +21,7 @@ bool Kernel::SolicitarRegistro(PCB * nuevo)
 {
 	for (int i = 0; i < LONG; i++)
 	{
-		if (Tabla[i]->GetEstado() == LIBRE)
+		if (Tabla[i] == NULL)
 		{
 			Tabla[i] = nuevo;
 			return true;
@@ -61,5 +65,10 @@ bool Kernel::LiberarRegistro(PCB *Nuevo)
 void Kernel::ActivarPCB(int pos)
 {
 	PCBActivo = pos;
-	int *x = Tabla[PCBActivo]->GetInstruccion();
+	int *funcion = Tabla[PCBActivo]->GetInstruccion();
+	Tabla[PCBActivo]->SetEstado(EJECUCION);
+	typedef int(*cb)(int);
+	cb RealizarFuncion = (cb)*(&funcion);
+	RealizarFuncion(1);
+	Tabla[PCBActivo]->SetEstado(TERMINADO);
 }

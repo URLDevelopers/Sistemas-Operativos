@@ -20,6 +20,8 @@ public:
 
 	int GetEstado();
 
+	void SetEstado(int estado);
+
 
 
 };

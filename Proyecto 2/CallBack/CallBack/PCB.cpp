@@ -24,6 +24,11 @@ int PCB::GetId()
 	return this->id;
 }
 
+//Establece el estado del PCB
+void PCB::SetEstado(int estado)
+{
+	this->Estado = estado;
+}
 //Retorna el puntero de la instruccion del PCB actual
 int* PCB::GetInstruccion()
 {

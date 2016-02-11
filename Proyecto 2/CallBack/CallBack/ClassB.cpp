@@ -9,7 +9,7 @@ ClassB::ClassB()
 	
 }
 
-void ClassB::SetCB3(int(*funcion)(int))
+void ClassB::SetCB3(int(*&funcion)(int))
 {
 	funcion = &ClassB::Funcion3;
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include "PCB.h"
 
-
 class Kernel
 {
 	//Variables

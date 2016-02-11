@@ -24,7 +24,7 @@ int main()
 	//Callbacks
 	int(*callback1)(int) = &Funcion1;
 	int(*callback2)(int) = &ClassA::Funcion2;
-	int(*callback3)(int); 
+	int(*callback3)(int) = NULL; 
 	ClassB::SetCB3(callback3);
 
 	Kernel *Core = new Kernel();
