@@ -10,6 +10,8 @@ private:
 	int id;
 	int *Instruccion;
 	int Estado;
+	PCB *next;
+	PCB *prev;
 
 public:
 
@@ -22,7 +24,12 @@ public:
 
 	void SetEstado(int estado);
 
+	void SetNext(PCB *next);
 
+	PCB *GetNext();
 
+	PCB *GetPrev();
+
+	void SetPrev(PCB * prev);
 };
 

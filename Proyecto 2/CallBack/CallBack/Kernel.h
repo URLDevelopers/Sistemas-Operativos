@@ -1,5 +1,6 @@
 #pragma once
 #include "PCB.h"
+#include <stdlib.h>
 
 class Kernel
 {
@@ -18,26 +19,28 @@ public:
 	Kernel();
 	~Kernel();
 
-	//Tabla de PCB
-	PCB *Tabla[LONG];
+	//Tabla
+	PCB *Table;
 
 	int GetID();
 
 	bool SolicitarRegistro(PCB *nuevo);
 	
-	bool LiberarRegistro(int pos);
-	
+
 	bool LiberarRegistro(PCB *nuevo);
 
-	void ActivarPCB(int pos);
+	void ActivarPCB(PCB *nodo);
 
 	int PCBActivo;
+
+	void EjecutarSistemaOperativo();
 
 private:
 
 	int ID;
 
 	
+
 
 
 

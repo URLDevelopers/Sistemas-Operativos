@@ -1,14 +1,16 @@
 #include "stdafx.h"
 #include "Kernel.h"
+#include <cstdlib>
+#include <list>
+#include "ClassA.h"
+#include "ClassB.h"
 
+using namespace std;
 
 Kernel::Kernel()
 {
 	ID = 0;
-	for (int i = 0; i < LONG; i++)
-	{
-		Tabla[i] = NULL;
-	}
+	Table = NULL;
 }
 
 
@@ -19,15 +21,18 @@ Kernel::~Kernel()
 //Solicitar registro disponible de PCB
 bool Kernel::SolicitarRegistro(PCB * nuevo)
 {
-	for (int i = 0; i < LONG; i++)
+	if (Table == NULL)
 	{
-		if (Tabla[i] == NULL)
-		{
-			Tabla[i] = nuevo;
-			return true;
-		}
+		Table = nuevo;
 	}
-	return false;
+	else
+	{
+		nuevo->SetNext(Table);
+		Table->SetPrev(nuevo);
+		Table = nuevo;
+
+	}
+	return true;
 }
 
 int Kernel::GetID()
@@ -37,38 +42,23 @@ int Kernel::GetID()
 }
 
 //Liberar el Registro disponible PCB
-bool Kernel::LiberarRegistro(int pos)
+bool Kernel::LiberarRegistro(PCB *nodo)
 {
-	if (pos < LONG && pos >= 0)
-	{
-		return false;
-	}
-	Tabla[pos]->~PCB();
 	return true;
 }
 
-//Liberar el Registro disponible PCB
-bool Kernel::LiberarRegistro(PCB *Nuevo)
+//Llamada a callback activo
+void Kernel::ActivarPCB(PCB *nodo)
 {
-	for (int i = 0; i < LONG; i++)
-	{
-		if (Tabla[i] == Nuevo)
-		{
-			Tabla[i]->~PCB();
-			return true;
-		}
-	}
-	return false;
+	int *funcion = nodo->GetInstruccion();
+	typedef int(*Metodo)(int);
+	Metodo RealizarFuncion = (Metodo)*(&funcion);
+	nodo->SetEstado(EJECUCION);
+	RealizarFuncion(nodo->GetId());
+	nodo->SetEstado(TERMINADO);
 }
 
-//Llamada a callback activo
-void Kernel::ActivarPCB(int pos)
+void Kernel::EjecutarSistemaOperativo()
 {
-	PCBActivo = pos;
-	int *funcion = Tabla[PCBActivo]->GetInstruccion();
-	Tabla[PCBActivo]->SetEstado(EJECUCION);
-	typedef int(*cb)(int);
-	cb RealizarFuncion = (cb)*(&funcion);
-	RealizarFuncion(1);
-	Tabla[PCBActivo]->SetEstado(TERMINADO);
+
 }

@@ -24,7 +24,7 @@ int main()
 	//Callbacks
 	int(*callback1)(int) = &Funcion1;
 	int(*callback2)(int) = &ClassA::Funcion2;
-	int(*callback3)(int) = NULL; 
+	int(*callback3)(int) = NULL;
 	ClassB::SetCB3(callback3);
 
 	Kernel *Core = new Kernel();
@@ -34,12 +34,12 @@ int main()
 	Core->SolicitarRegistro(pcb1);
 	Core->SolicitarRegistro(pcb2);
 	Core->SolicitarRegistro(pcb3);
-	Core->ActivarPCB(0);
-	Core->ActivarPCB(1);
-	Core->ActivarPCB(2);
-	Core->LiberarRegistro(0);
-	Core->LiberarRegistro(1);
-	Core->LiberarRegistro(2);
+	Core->ActivarPCB(pcb1);
+	Core->ActivarPCB(pcb2);
+	Core->ActivarPCB(pcb3);
+	Core->LiberarRegistro(Core->Table);
+	Core->LiberarRegistro(Core->Table);
+	Core->LiberarRegistro(Core->Table);
 	cout << endl;
 	system("pause");
     return 0;
