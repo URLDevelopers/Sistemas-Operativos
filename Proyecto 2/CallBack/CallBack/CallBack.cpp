@@ -22,12 +22,18 @@ int main()
 {
 	cout << "Grupo 6" << endl;
 	//Callbacks
+
 	int(*callback1)(int) = &Funcion1;
 	int(*callback2)(int) = &ClassA::Funcion2;
 	int(*callback3)(int) = NULL;
-	ClassB::SetCB3(callback3);
 
 	Kernel *Core = new Kernel();
+	Core->EjecutarSistemaOperativo(callback1, callback2, callback3);
+
+	/*ClassB::SetCB3(callback3);
+
+	
+	
 	PCB *pcb1 = new PCB(Core->GetID(), (int*)callback1, NUEVO);
 	PCB *pcb2 = new PCB(Core->GetID(), (int*)callback2, NUEVO);
 	PCB *pcb3 = new PCB(Core->GetID(), (int*)callback3, NUEVO);
@@ -37,10 +43,10 @@ int main()
 	Core->ActivarPCB(pcb1);
 	Core->ActivarPCB(pcb2);
 	Core->ActivarPCB(pcb3);
+ 	Core->LiberarRegistro(Core->Table);
 	Core->LiberarRegistro(Core->Table);
 	Core->LiberarRegistro(Core->Table);
-	Core->LiberarRegistro(Core->Table);
-	cout << endl;
+	cout << endl;*/
 	system("pause");
     return 0;
 }

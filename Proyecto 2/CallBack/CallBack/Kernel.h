@@ -26,19 +26,21 @@ public:
 
 	bool SolicitarRegistro(PCB *nuevo);
 	
-
 	bool LiberarRegistro(PCB *nuevo);
 
 	void ActivarPCB(PCB *nodo);
 
 	int PCBActivo;
 
-	void EjecutarSistemaOperativo();
+	void EjecutarSistemaOperativo(int (*cb1)(int), int(*cb2)(int), int(*cb3)(int));
+
+	void assembler();
 
 private:
 
 	int ID;
 
+	int LongCol;
 	
 
 
