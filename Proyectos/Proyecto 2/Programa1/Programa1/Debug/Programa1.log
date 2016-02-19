@@ -1,3 +1,5 @@
-﻿  Programa1.cpp
-c:\users\jcdur\google drive\landivar\cuarto año\primer semestre\sistemas operativos\programas\tarea 1\programa1\programa1\programa1.cpp(106): warning C4715: 'kernel::firstAvailable': no todas las rutas de acceso de control devuelven un valor
-  Programa1.vcxproj -> C:\Users\jcdur\Google Drive\Landivar\Cuarto año\Primer Semestre\Sistemas Operativos\Programas\Tarea 1\Programa1\Debug\Programa1.exe
+﻿  stdafx.cpp
+  Programa1.cpp
+  LINK : no se encontró C:\Users\Pablo\Desktop\Sistemas-Operativos\Proyectos\Proyecto 2\Programa1\Debug\Programa1.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+Programa1.obj : warning LNK4075: se omite '/EDITANDCONTINUE' debido a la especificación '/OPT:LBR'
+  Programa1.vcxproj -> C:\Users\Pablo\Desktop\Sistemas-Operativos\Proyectos\Proyecto 2\Programa1\Debug\Programa1.exe
