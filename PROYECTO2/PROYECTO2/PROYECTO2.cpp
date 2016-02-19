@@ -102,6 +102,7 @@ public:
 		memory = 0;
 		*adressToProcess = NULL;
 		*referenceToHeap = NULL;
+
 		*referenteToStack = NULL;
 		programcounter = NULL;
 		typeasignament = NULL;
@@ -199,7 +200,7 @@ public:
 		return i == NULL;
 	}
 	~kernel() {
-		delete(this->vpcb);
+		//delete(this->vpcb);
 	}
 };
 
