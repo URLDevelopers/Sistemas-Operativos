@@ -1,8 +1,10 @@
-﻿  Proyecto2SistemasOperativosGrupo5.cpp
-c:\users\lmunoz\desktop\pruebas\proyecto\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5.cpp(82): warning C4005: 'OVERFLOW': macro redefinition
+﻿  stdafx.cpp
+  Proyecto2SistemasOperativosGrupo5.cpp
+c:\users\lmunoz\desktop\proyecto\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5.cpp(82): warning C4005: 'OVERFLOW': macro redefinition
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\math.h(954): note: see previous definition of 'OVERFLOW'
-c:\users\lmunoz\desktop\pruebas\proyecto\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5.cpp(196): warning C4101: 'REGecs': unreferenced local variable
-c:\users\lmunoz\desktop\pruebas\proyecto\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5.cpp(196): warning C4101: 'REGess': unreferenced local variable
-c:\users\lmunoz\desktop\pruebas\proyecto\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5.cpp(196): warning C4101: 'REGees': unreferenced local variable
-c:\users\lmunoz\desktop\pruebas\proyecto\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5.cpp(196): warning C4101: 'REGeds': unreferenced local variable
-  Proyecto2SistemasOperativosGrupo5.vcxproj -> C:\Users\lmunoz\Desktop\PRUEBAS\Proyecto\Proyecto2SistemasOperativosGrupo5\Debug\Proyecto2SistemasOperativosGrupo5.exe
+c:\users\lmunoz\desktop\proyecto\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5.cpp(196): warning C4101: 'REGecs': unreferenced local variable
+c:\users\lmunoz\desktop\proyecto\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5.cpp(196): warning C4101: 'REGess': unreferenced local variable
+c:\users\lmunoz\desktop\proyecto\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5.cpp(196): warning C4101: 'REGees': unreferenced local variable
+c:\users\lmunoz\desktop\proyecto\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5\proyecto2sistemasoperativosgrupo5.cpp(196): warning C4101: 'REGeds': unreferenced local variable
+  LINK : C:\Users\lmunoz\Desktop\Proyecto\Proyecto2SistemasOperativosGrupo5\Debug\Proyecto2SistemasOperativosGrupo5.exe not found or not built by the last incremental link; performing full link
+  Proyecto2SistemasOperativosGrupo5.vcxproj -> C:\Users\lmunoz\Desktop\Proyecto\Proyecto2SistemasOperativosGrupo5\Debug\Proyecto2SistemasOperativosGrupo5.exe
