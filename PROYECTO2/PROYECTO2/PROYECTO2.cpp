@@ -1,318 +1,221 @@
+// PROYECTO2.cpp: define el punto de entrada de la aplicación de consola.
+//
+
 #include "stdafx.h"
 #include <iostream>
-
+#include <string>
+#include <stdlib.h>
+#include<time.h>
 using namespace std;
-#define tamanio 10
-#pragma region Proyecto1
-static int Funcion1(int param)
-{
-	cout << "Parametro: " << param << " Funcion: 1" << endl;
+#define TAMANIO 10//TAMANIO DE LA TABLA
+#define TOP 1000
+#pragma region FASE1
+static int function(int param) {
+	cout << "Parametro: " << param << " de la  Funcion" << endl;
 	return 1;
 }
-
-class ClassA
+#pragma region CLASES
+class AClass
 {
 public:
-	static int Funcion2(int param);
+
+	typedef int(AClass::*Callback)(int);
+	static int function(int param) {
+		cout << "Parametro: " << param << " Funcion: 2" << endl;
+		return 2;
+	}
 };
 
-int ClassA::Funcion2(int param)
-{
-	cout << "Parametro: " << param << " Funcion: 2" << endl;
-	return 2;
-}
-
-class ClassB
+class  BClass : public AClass
 {
 public:
-	static void setCallBack(int (ClassB::*&cb)(int));
+
+	typedef int(BClass::*Callback)(int);
+	typedef int(BClass::*var)(int);
+	void direc(var &v)
+	{
+		v = &BClass::function;
+	}
+
 private:
-	int Funcion3(int param);
+	int function(int param) {
+		cout << "Parametro: " << param << " Funcion: 3" << endl;
+		return 3;
+	}
+	
 };
-
-int ClassB::Funcion3(int param)
-{
-	cout << "Parametro: " << param << " Funcion: 3" << endl;
-	return 3;
-}
-
-void ClassB::setCallBack(int (ClassB::*&cb)(int))
-{
-	cb = &ClassB::Funcion3;
-}
-
-typedef int(*CallBack)(int);
-typedef int(ClassB::*CallBackB)(int);
 #pragma endregion
-#pragma region proyecto2
-class PCB
-{
-private:
-	int id;
+typedef int(*MyCallBack)(int);
+//typedef int(BClass::*Callback)(int);
+typedef int(AClass::*Callback)(int);
+#pragma endregion
+
+class PCB {
+	//int id;
+	//string state;
+	//int memory;
+	//(int*)adress;//adress to general see
+	////
+	//int *referenceToHeap;//direccion heap
+	//int *referenteToStack;//direccion del stack
+	////
+	//int programcounter;
+	int count;
 public:
-	int Estado, *Funcion;
-
-	ClassB *objeto;
-
-	PCB(int id, int EstadoParam, int *callback)
-	{
-		this->id = id;
-		this->Estado = EstadoParam;
-		this->Funcion = callback;
-		this->objeto = NULL;
+	MyCallBack subcallback;
+	int id;
+	string state;
+	int memory;
+	int *adressToProcess;//adress to general see
+	int* directions[TAMANIO];				 //
+	int *referenceToHeap;//direccion heap
+	int *referenteToStack;//direccion del stack
+	int typeasignament;
+					  //
+	int programcounter;
+	PCB() {
+		count = NULL;
+		state = "NUEVO";
+		memory = 0;
+		adressToProcess = NULL;
+		//*referenceToHeap = NULL;
+		//*referenteToStack = NULL;
+		programcounter = 0;
+		typeasignament = 0;
 	}
-
-	PCB(int id, int status, int *callback, ClassB *obj)
-	{
-		this->id = id;
-		this->Estado = status;
-		this->Funcion = callback;
-		this->objeto = obj;
+	void call(int i, int v) {
+		MyCallBack m1 = NULL, m2 = NULL;
+		m1 = (MyCallBack)directions[i];
+		m1(v);
 	}
-
-	~PCB()
+	void ingproceso(int pid, string estado)
 	{
-		this->id = this->Estado = 0;
-		this->Funcion = NULL;
-		if (this->objeto != NULL)
+		this->id = pid;
+		this->state = estado;
+		//*memory = memoria;
+		//*adressToProcess = *dir;
+		//programcounter = pc;
+	}
+	
+	~PCB() {
+		state = "";
+		memory = 0;
+		*adressToProcess = NULL;
+		*referenceToHeap = NULL;
+		*referenteToStack = NULL;
+		programcounter = NULL;
+		typeasignament = NULL;
+	}
+	int getCount() {
+		if (count >= TAMANIO)
 		{
-			this->objeto = NULL;
+			count = NULL;
+			return NULL;
 		}
-	}
-	int getId()
-	{
-		return this->id;
+		else
+			return count++;
 	}
 };
-
-class Kernel
-{
+class kernel {
+	PCB *vpcb[TAMANIO];  // [10];
+	
+	int pcbactual;
 private:
-	int id_count;
-	bool Valirdar(int i)
-	{
-		if (i >= tamanio || i < 0)
-			return 3;
-		if (this->pcb[i] != NULL)
-		{
-			if (this->pcb[i]->Estado != 6)
-				return 1;
-			else
-				FinalizarProcesos(i);
+	bool ejecutar(PCB *it) {
+		srand(time(NULL));
+		int t = rand() % TOP;
+		if (it->typeasignament && ExisteElPCB(it))//0 heap, 1 stack
+		{	
+			int i = it->getCount();
+		    *it->directions[i] = *(int*)&function;//(int*)&funtion;
+			it->subcallback(t);
 		}
-		if (count >= tamanio) {
-			return 2;
+		else if (!it->typeasignament && ExisteElPCB(it)) {
+			int ik = it->getCount();
+			*it->directions[ik] = *(int*)function;//(int*)&funtion;
+			it->subcallback(t);
 		}
-		else {
-			return 0;
-		}
+		return 0;
 	}
-
-	static void Procesos(PCB *pcb, int val)
+public:
+	kernel() {
+		*vpcb = new PCB[10];
+		pcbactual = NULL;
+	}
+	/*void agregarproceso(int pid, string estado, int memoria, int *dir, int pc)
 	{
-		int result;
-		int *function = pcb->Funcion;
-		pcb->Estado = 1;
-		if (pcb->objeto != NULL)
+		if (pcbactual < 10)
 		{
-			CallBackB *cb = (CallBackB*)(function);
-			result = (pcb->objeto->**cb)(val);
+			*vpcb[pcbactual] = new PCB();
+			vpcb[pcbactual].ingproceso(pid, estado, memoria, dir, pc);
+			pcbactual++;
 		}
 		else
 		{
-			CallBack cb = (CallBack)*(&function);
-			result = cb(val);
+			liberar();
 		}
-		pcb->Estado = 6;
-		cout << "Proceso terminado\nNumero de Proceso: " << pcb->getId() << "\nResultado: " << result << endl << endl;
-	}
-
-	static bool validarElProceso(PCB *current)
-	{
-		if (current == NULL)
-			return 1;
-		if (current->Estado == 6)
-			return 2;
-		return 0;
-	}
-
-	int firstAvailableIndex()
-	{
-		int i = 0;
-		while (i < tamanio)
+	}*/
+	bool agregarProceso(int micaseofmemory,int pid, string state) {
+		if (pcbactual < TAMANIO)
 		{
-			if (this->pcb[i] == NULL)
-				return i;
-			else if (this->pcb[i]->Estado == 6)
+			vpcb[pcbactual] = new PCB();
+			//++pcbactual;
+			if (micaseofmemory == NULL)
+			{//se envia la direccion del heap
+				//pcb[pcbactual]->ingproceso(++pcbactual, state);
+				vpcb[pcbactual]->subcallback= &function;
+			}
+			else if (micaseofmemory == 1)
 			{
-				FinalizarProcesos(i);
-				return i;
+				vpcb[pcbactual]->subcallback = &AClass::function;
 			}
-			i++;
-		}
-		return -1;
-	}
-	PCB *getProcesorId(int id)
-	{
-		for (int i = 0; i < tamanio; i++)
-			if (pcb[i] != NULL && pcb[i]->getId() == id) {
-				return pcb[i];
-			}
-		return NULL;
-	}
-
-	int getProceso(int id)
-	{
-		for (int i = 0; i < tamanio; i++)
-			if (pcb[i] != NULL && pcb[i]->getId() == id) {
-				return i;
-			}
-			else {
-				return -1;
-			}
-	}
-public:
-	PCB *pcb[tamanio];
-	int count;
-
-	Kernel()
-	{
-		this->count = this->id_count = 0;
-		for (int i = 0; i < tamanio; i++)
-			this->pcb[i] = NULL;
-	}
-
-	~Kernel()
-	{
-		for (int i = 0; i < tamanio; i++)
-			if (pcb[i] != NULL)
+			else if (micaseofmemory == 2)
 			{
-				FinalizarProcesos(i);
-				pcb[i] = NULL;
+				vpcb[pcbactual]->subcallback = &AClass::function;
 			}
-		this->count = 0;
-	}
-
-	int CrearProceso(int *callback)
-	{
-		int result = Valirdar(count);
-		if (result != 0)
-			return result;
-		PCB *pcb = new PCB(id_count++, 3, callback);
-		int index = firstAvailableIndex();
-		this->pcb[index] = pcb;
-		count++;
-		return 0;
-	}
-
-	int CrearProceso(int *callback, int i)
-	{
-		int result = Valirdar(i);
-		if (result != 0) {
-			return result;
-		}
-		PCB *pcb = new PCB(id_count++, 3, callback);
-		this->pcb[i] = pcb;
-		count++;
-		return 0;
-	}
-
-	int CrearProceso(int *callback, ClassB *obj)
-	{
-		int result = Valirdar(count);
-		if (result != 0) {
-			return result;
-		}
-		PCB *pcb = new PCB(id_count++, 3, callback, obj);
-		int index = firstAvailableIndex();
-		this->pcb[index] = pcb;
-		count++;
-		return 0;
-	}
-
-	int CrearProceso(int *callback, ClassB *obj, int i)
-	{
-		int result = Valirdar(i);
-		if (result != 0)
-			return result;
-		PCB *pcb = new PCB(id_count++, 3, callback, obj);
-		this->pcb[i] = pcb;
-		i++;
-		return 0;
-	}
-
-	int runProcessAt(int i, int val)
-	{
-		PCB *current = this->pcb[i];
-		int result = validarElProceso(current);
-		if (result != 0) {
-			return result;
-		}
-		Procesos(current, val);
-		return 0;
-	}
-
-	int runProcessById(int id, int val)
-	{
-		PCB *current = getProcesorId(id);
-		int result = validarElProceso(current);
-		if (result != 0) {
-			return result;
-		}
-		Procesos(current, val);
-		return 0;
-	}
-	int ProbarProcesos(int val)
-	{
-		for (int i = 0; i < tamanio; i++)
-		{
-			runProcessAt(i, val);
-			FinalizarProcesos(i);
-		}
-		return 0;
-	}
-
-	int FinalizarProcesos(int i)
-	{
-		if (i >= tamanio || i < 0) {
-			return 3;
-		}
-		if (this->pcb[i] == NULL) {
+			else// si no la del stack
+				vpcb[pcbactual]->ingproceso(++pcbactual, state);
 			return 1;
+		}	
+		liberar();
+		return 0;
+	}
+	void liberar()
+	{	//liberar memoria
+		--pcbactual;
+		vpcb[pcbactual]->~PCB();
+		delete(vpcb[pcbactual]);
+	}
+	bool ProcesoEspecifico(int i) {//i es el indice del proceso
+		if (!this->ExisteElPCB(this->vpcb[i]))
+		{
+			return -1;
 		}
-		count--;
-		this->pcb[i]->~PCB();
-		this->pcb[i] = NULL;
+		ejecutar(this->vpcb[i]);
 		return 0;
 	}
 
-	int FinalizarProyectoID(int id)
-	{
-		int index = getProceso(id);
-		if (index < 0) {
-			return 3;
-		}
-		FinalizarProcesos(index);
-		return 0;
+	bool ExisteElPCB(PCB *i) {
+		return i == NULL;
+	}
+	~kernel() {
+		delete(this->vpcb);
 	}
 };
-#pragma endregion
+
 int main()
 {
-	int valor1;
-	cout << "Ingrese valor" << endl;
-	cin >> valor1;
-	Kernel *kernel = new Kernel();
-	kernel->CrearProceso((int*)&Funcion1);
-	kernel->CrearProceso((int*)&ClassA::Funcion2);
-	CallBackB cb;
-	ClassB::setCallBack(cb);
-	ClassB *obj = new ClassB();
-	kernel->CrearProceso((int*)&cb, obj);
-
-	kernel->ProbarProcesos(valor1);
-
+	//toma de valores
+	kernel  *k = new kernel();
+	
+	for (size_t i = 0; i < TAMANIO; i++)
+	{
+		k->agregarProceso(1,i,"NUEVO");
+		k->ProcesoEspecifico(0);
+	}
+	//k->ProcesoEspecifico(0);
+	k->~kernel();
+	delete(k);
 	system("PAUSE...");
-	kernel->~Kernel();
 	return 0;
 }
