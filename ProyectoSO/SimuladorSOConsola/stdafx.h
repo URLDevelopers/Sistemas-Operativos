@@ -6,3 +6,6 @@
 #pragma once
 
 // TODO: mencionar aquí los encabezados adicionales que el programa necesita
+
+#include <stdio.h>
+#include <tchar.h>

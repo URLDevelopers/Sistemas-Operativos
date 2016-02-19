@@ -1,64 +1,34 @@
 #include "PCB.h"
-#include "stdafx.h"
+#include <stdlib.h>
 
-#pragma once
 class Kernel
 {
 
+#define SIZE 10
+
+#define LIBRE 0
+#define NUEVO 1
+#define ESPERA 2
+#define EJECUCION 3
+#define TERMINADO 4
+#define DORMIDO 5
+
 public:
-	
-	
-	Kernel(int LONG)
-	{
-		longitudTabla = LONG;
-		for (int i = 0; i < longitudTabla; i++)
-		{
-			TablaProcesos[i] = nullptr;
-		}
-	}
+	Kernel();
+	~Kernel();
 
-	~Kernel()
-	{
-	}
-
-	PCB* TablaProcesos [10];
-	
-	void CargarProceso(int* procesoUsuario)
-	{
-
-	}
-
+	PCB *Table;
+	int GetId();
+	bool RegistrarPCB(PCB *nuevo);
+	bool LiberarPCB(PCB *nuevo);
+	void ActivarPCB(PCB *nodo);
+	int PCBActivo;
+	void EjecutarCore(int(*cb1)(int), int(*cb2)(int), int(*cb3)(int));
+	void assembler();
 
 private:
-	
-	int longitudTabla;
-	void PrepararProceso()
-	{
 
-	}
-
-	void SuspenderProceso()
-	{
-
-	}
-
-	void AtenderProceso()
-	{
-
-	}
-
-	void EjecutarProceso()
-	{
-
-	}
-
-	PCB* _buscarPCBDisponible()
-	{
-		for (int i = 0; i < longitudTabla; i++)
-		{
-
-		}
-	}
-
+	int Id;
+	int SizeCore;
 };
 

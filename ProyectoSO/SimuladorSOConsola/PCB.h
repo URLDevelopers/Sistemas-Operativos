@@ -1,33 +1,32 @@
-#include "RegistrosCPU.h"
 #pragma once
 class PCB
 {
-	enum Estado
-	{
-		nuevo = 1,
-		enEjecucion = 2,
-		enEspera = 3,
-		preparado = 4,
-		terminado =5
-	};
+public:
+	PCB(int id, int *proceso, int estado);
+	~PCB();
+
+private:
+	int id;
+	int Estado;
+	int* proceso;
+	PCB *Siguiente;
+	PCB *Anterior;
 
 public:
-	PCB()
-	{
-		this->IdEstado = nuevo;
-		
-	}
+	int GetId();
 
-	~PCB()
-	{
-	}
+	int* GetProceso();
 
-	int IdPCB;
-	int IdEstado;
-	int* ContadorPrograma;
-	int* Proceso;
-	PCB* Siguiente;
-	double tiempoReal; 
-	RegistrosCPU RegistrosCPU;
+	int GetEstado();
+
+	void SetEstado(int estado);
+
+	void SetSiguiente(PCB *next);
+
+	void SetAnterior(PCB *siguiente);
+
+	PCB *GetSiguiente();
+
+	PCB *GetAnterior();
 };
 

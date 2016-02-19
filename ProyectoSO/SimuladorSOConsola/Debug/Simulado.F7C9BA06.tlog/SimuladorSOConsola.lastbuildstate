@@ -1,2 +1,2 @@
-#TargetFrameworkVersion=v4.5:PlatformToolSet=v120:EnableManagedIncrementalBuild=true:VCToolArchitecture=Native32Bit
-Debug|Win32|C:\Git\Sistemas-Operativos\ProyectoSO\|
+#TargetFrameworkVersion=v4.5.2:PlatformToolSet=v140:EnableManagedIncrementalBuild=true:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=8.1
+Debug|Win32|\\psf\Home\Documents\Sistemas Operativos\GitHub\Sistemas-Operativos\ProyectoSO\|
