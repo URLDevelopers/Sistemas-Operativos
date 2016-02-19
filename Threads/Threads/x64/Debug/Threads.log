@@ -1,0 +1,16 @@
+﻿Build started 13/02/2016 10:33:02 p. m..
+     1>Project "c:\Users\daniel mejia\documents\visual studio 2015\Projects\Threads\Threads\Threads.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"stdafx.h" /Fp"x64\Debug\Threads.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"x64\Debug\Threads.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt Threads.cpp
+         Threads.cpp
+     1>c:\users\daniel mejia\documents\visual studio 2015\projects\threads\threads\threads.cpp(33): error C4235: nonstandard extension used: '__asm' keyword not supported on this architecture
+     1>c:\users\daniel mejia\documents\visual studio 2015\projects\threads\threads\threads.cpp(35): error C2065: 'mov': undeclared identifier
+     1>c:\users\daniel mejia\documents\visual studio 2015\projects\threads\threads\threads.cpp(35): error C2146: syntax error: missing ';' before identifier 'rax'
+     1>c:\users\daniel mejia\documents\visual studio 2015\projects\threads\threads\threads.cpp(35): error C2065: 'rax': undeclared identifier
+     1>Done Building Project "c:\Users\daniel mejia\documents\visual studio 2015\Projects\Threads\Threads\Threads.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:02.46
