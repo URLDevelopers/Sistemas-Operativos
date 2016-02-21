@@ -34,7 +34,7 @@ public:
 
 	void EjecutarSistemaOperativo(int (*cb1)(int), int(*cb2)(int), int(*cb3)(int));
 
-	void assembler();
+	int assembler();
 
 private:
 

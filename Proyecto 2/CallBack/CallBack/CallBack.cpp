@@ -28,7 +28,9 @@ int main()
 	int(*callback3)(int) = NULL;
 
 	Kernel *Core = new Kernel();
-	Core->EjecutarSistemaOperativo(callback1, callback2, callback3);
+	cout << Core->assembler() << endl;
+	//Core->EjecutarSistemaOperativo(callback1, callback2, callback3);
+
 
 	/*ClassB::SetCB3(callback3);
 

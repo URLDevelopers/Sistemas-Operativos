@@ -128,11 +128,13 @@ void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(
 }
 
 //Assembler
-void Kernel::assembler()
+int Kernel::assembler()
 {
+	int16_t x = 0;
 	__asm
 	{
-		mov al, 2
-		mov dx, ax
+		mov ax, 10d
+		mov x, ax
 	}
+	return x;
 }

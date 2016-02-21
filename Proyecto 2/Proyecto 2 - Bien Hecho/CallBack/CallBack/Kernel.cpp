@@ -6,106 +6,119 @@
 
 using namespace std;
 
+//Constructor
 Kernel::Kernel()
 {
-	ID = 0;
-	Table = NULL;
-	LongCol = 0;
+	this->ID = 0;
+	this->Head = NULL;
+	this->Tail = NULL;
+	this->LongCol = 0;
 }
 
-
+//Destructor
 Kernel::~Kernel()
 {
-	ID = LongCol = 0;
-	Table = NULL;
+	this->ID = this->LongCol = 0;
+	this->Head = NULL;
+	this->Tail = NULL;
 }
 
 //Solicitar registro disponible de PCB
 bool Kernel::SolicitarRegistro(PCB * nuevo)
 {
-	if (LongCol >= LONG)
+	if (this->LongCol >= LONG)
 	{
 		return false;
 	}
-	if (Table == NULL)
+	if (this->Head == NULL)
 	{
-		Table = nuevo;
-		Table->SetNext(Table);
-		Table->SetPrev(Table);
+		this->Head = nuevo;
+		this->Tail = nuevo;
 	}
 	else
 	{
-		nuevo->SetNext(Table);
-		nuevo->SetPrev(Table->GetPrev());
-		Table->GetPrev()->SetNext(nuevo);
-		Table->SetPrev(nuevo);
-		Table = nuevo;
+		nuevo->SetNext(Head);
+		Head->SetPrev(nuevo);
+		this->Head = nuevo;
 	}
-	LongCol++;
+	cout << "El proceso " << nuevo->GetId() << " se ha creado." << endl;
+	this->LongCol++;
 	return true;
 }
 
+//Obtener un ID
 int Kernel::GetID()
 {
-	ID++;
-	return ID;
+	this->ID++;
+	return this->ID;
 }
 
 //Liberar el Registro disponible PCB
-bool Kernel::LiberarRegistro(PCB *nodo)
+bool Kernel::LiberarRegistro()
 {
-	if (LongCol == 1)
+	Sleep(1000);
+	int id_aux = this->Tail->GetId();
+	cout << "El proceso" << id_aux << " se esta eliminando." << endl;
+	PCB *aux = this->Tail;
+	if (this->Tail == this->Head)
 	{
-		if (Table == nodo)
-		{
-			Table->~PCB();
-			Table = NULL;
-			LongCol--;
-			return true;
-		}
-		return false;
+		this->Tail = NULL;
+		this->Head = NULL;
 	}
 	else
 	{
-		PCB *aux = Table;
-		for (int i = 0; i < LongCol; i++)
-		{
-			if (aux == nodo)
-			{
-				aux->GetPrev()->SetNext(aux->GetNext());
-				aux->GetNext()->SetPrev(aux->GetPrev());
-				LongCol--;
-				if (aux == Table)
-				{
-					Table = Table->GetNext();
-				}
-				aux->~PCB();
-				return true;
-			}
-			aux = aux->GetNext();
-		}
-		return false;
+		this->Tail = this->Tail->GetPrev();
+		this->Tail->SetNext(NULL);
 	}
+	this->LongCol--;
+	aux->~PCB();
+	aux = NULL;
+	Sleep(1000);
+	cout << "El proceso" << id_aux << " se ha eliminando." << endl;
+	cout << endl;
+	return true;
 }
 
 //Llamada a callback activo
-void Kernel::ActivarPCB(PCB *nodo)
+void Kernel::ActivarPCB()
 {
-	int *funcion = nodo->GetInstruccion();
+	int *funcion = this->Tail->GetInstruccion();
 	typedef int(*Metodo)(int);
 	Metodo RealizarFuncion = (Metodo)*(&funcion);
-	nodo->SetEstado(EJECUCION);
-	RealizarFuncion(nodo->GetId());
-	nodo->SetEstado(TERMINADO);
+	this->Tail->SetEstado(EJECUCION);
+	Sleep(1000);
+	cout << "Estado del proceso " << this->Tail->GetId() << ": En Ejecucion" << endl;
+	Sleep(1000);
+	cout << endl;
+	RealizarFuncion(this->Tail->GetId());
+	cout << endl;
+	this->Tail->SetEstado(TERMINADO);
+	cout << "Estado del proceso " << this->Tail->GetId() << ": Terminado" << endl;
+}
+
+//Ejetcutar todos los procesos del SO
+void Kernel::EjecutarProcesos()
+{
+	while (LongCol > 0)
+	{
+		ActivarPCB();
+		LiberarRegistro();
+		if(Tail!=NULL)
+		{ 
+			cout << "Para ejecutar el siguiente proceso presione enter ..." << endl;
+		}
+		else
+		{
+			cout << "Ya no existen mas procesos, presione una tecla para continuar..." << endl;
+		}
+		getchar();
+	}
 }
 
 void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(int))
 {
 	ClassB::SetCB3(cb3);
 	Kernel *Core = new Kernel();
-	char ej = '1';
-	while (ej == '1')
-	{
 		system("cls");
 		short reg[12];
 		__asm {
@@ -122,7 +135,6 @@ void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(
 				mov reg[10], ss
 				mov reg[11], es
 		}
-		PCB *pcb1 = new PCB(Core->GetID(), (int*)cb1, NUEVO, reg);
 		__asm {
 			mov reg[0], ax
 				mov reg[1], bx
@@ -137,7 +149,7 @@ void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(
 				mov reg[10], ss
 				mov reg[11], es
 		}
-		PCB *pcb2 = new PCB(Core->GetID(), (int*)cb2, NUEVO, reg);
+		
 		__asm {
 			mov reg[0], ax
 				mov reg[1], bx
@@ -152,7 +164,7 @@ void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(
 				mov reg[10], ss
 				mov reg[11], es
 		}
-		PCB *pcb3 = new PCB(Core->GetID(), (int*)cb3, NUEVO, reg);
+		
 		__asm {
 			mov reg[0], ax
 				mov reg[1], bx
@@ -167,29 +179,13 @@ void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(
 				mov reg[10], ss
 				mov reg[11], es
 		}
-		SolicitarRegistro(pcb1);
-		SolicitarRegistro(pcb2);
-		SolicitarRegistro(pcb3);
-		ActivarPCB(pcb1);
-		ActivarPCB(pcb2);
-		ActivarPCB(pcb3);
-		LiberarRegistro(pcb1);
-		LiberarRegistro(pcb2);
-		LiberarRegistro(pcb3);
-		cin >> ej;
-		if (ej != '1')
-		{
-			break;
-		}
-	}
-}
 
-//Assembler
-void Kernel::assembler()
-{
-	__asm
-	{
-		mov al, 2
-		mov dx, ax
-	}
+		SolicitarRegistro(new PCB(Core->GetID(), (int*)cb1, NUEVO, reg));
+		SolicitarRegistro(new PCB(Core->GetID(), (int*)cb2, NUEVO, reg));
+		SolicitarRegistro(new PCB(Core->GetID(), (int*)cb3, NUEVO, reg));
+		cout << endl;
+		cout << "Presione una tecla para ejecutar los procesos..." << endl;
+		getchar();
+		system("cls");
+		EjecutarProcesos();
 }

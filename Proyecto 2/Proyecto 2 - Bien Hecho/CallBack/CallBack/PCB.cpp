@@ -29,8 +29,8 @@ PCB::~PCB()
 	this->Estado = 0;
 	this->id = 0;
 	this->Instruccion = NULL;
-	this->prev = NULL;
 	this->next = NULL;
+	this->prev = NULL;
 }
 
 //Metodos
@@ -76,8 +76,8 @@ PCB *PCB::GetPrev()
 	return this->prev;
 }
 
-//Establece el puntero del nodo anterior
-void PCB::SetPrev(PCB *prev)
+//Establece el puntero para el anterior PCB
+void PCB::SetPrev(PCB* prev)
 {
 	this->prev = prev;
 }

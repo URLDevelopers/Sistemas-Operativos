@@ -1,7 +1,7 @@
 #pragma once
 #include "PCB.h"
 #include <stdlib.h>
-
+#include <Windows.h>
 class Kernel
 {
 	//Variables
@@ -20,27 +20,28 @@ public:
 	~Kernel();
 
 	//Tabla
-	PCB *Table;
+	PCB *Head, *Tail;
+
 
 	int GetID();
 
 	bool SolicitarRegistro(PCB *nuevo);
 	
-	bool LiberarRegistro(PCB *nuevo);
+	bool LiberarRegistro();
 
-	void ActivarPCB(PCB *nodo);
-
-	int PCBActivo;
+	void ActivarPCB();
 
 	void EjecutarSistemaOperativo(int (*cb1)(int), int(*cb2)(int), int(*cb3)(int));
+	
+	void EjecutarProcesos();
 
-	void assembler();
+	
 
 private:
 
 	int ID;
-
 	int LongCol;
+	
 	
 
 
