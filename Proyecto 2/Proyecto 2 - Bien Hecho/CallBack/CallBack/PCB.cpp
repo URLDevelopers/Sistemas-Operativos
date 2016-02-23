@@ -2,9 +2,9 @@
 #include "PCB.h"
 
 //Constructor de la clase
-PCB::PCB(int id, int*instr, int estado, short paramReg[12])
+PCB::PCB(int*instr, int estado, short paramReg[12])
 {
-	this->id = id;
+	this->id = GetId();
 	this->Instruccion = instr;
 	this->Estado = estado;
 	this->next = NULL;

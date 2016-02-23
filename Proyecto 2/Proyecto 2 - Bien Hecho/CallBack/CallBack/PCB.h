@@ -2,7 +2,7 @@
 class PCB
 {
 public:
-	PCB(int id, int *instr, int estado, short paramReg[12]);
+	PCB(int *instr, int estado, short paramReg[12]);
 	~PCB();
 
 	//Variables
