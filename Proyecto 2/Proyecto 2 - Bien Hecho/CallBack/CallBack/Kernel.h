@@ -35,8 +35,6 @@ public:
 	
 	void EjecutarProcesos();
 
-	void ObtenerRegistros(short *reg);
-
 private:
 
 	int ID;

@@ -58,7 +58,7 @@ bool Kernel::LiberarRegistro()
 {
 	Sleep(1000);
 	int id_aux = this->Tail->GetId();
-	cout << "El proceso" << id_aux << " se esta eliminando." << endl;
+	cout << "El proceso " << id_aux << " se esta eliminando." << endl;
 	PCB *aux = this->Tail;
 	if (this->Tail == this->Head)
 	{
@@ -74,7 +74,7 @@ bool Kernel::LiberarRegistro()
 	aux->~PCB();
 	aux = NULL;
 	Sleep(1000);
-	cout << "El proceso" << id_aux << " se ha eliminando." << endl;
+	cout << "El proceso " << id_aux << " se ha eliminando." << endl;
 	cout << endl;
 	return true;
 }
@@ -116,10 +116,16 @@ void Kernel::EjecutarProcesos()
 	}
 }
 
-//Obtener los valores de los registros
-void Kernel::ObtenerRegistros(short *reg)
+void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(int))
 {
-	//Obtener registros
+	
+	ClassB::SetCB3(cb3);
+	Kernel *Core = new Kernel();
+	system("cls");
+	
+	short reg[12];
+	int ip;
+	//PCB1
 	__asm {
 		mov reg[0], ax
 			mov reg[1], bx
@@ -133,26 +139,46 @@ void Kernel::ObtenerRegistros(short *reg)
 			mov reg[9], cs
 			mov reg[10], ss
 			mov reg[11], es
+			mov eax, [esp]
+			mov ip, eax
 	}
-}
-
-void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(int))
-{
-	
-	ClassB::SetCB3(cb3);
-	Kernel *Core = new Kernel();
-	system("cls");
-	
-	short reg[12];
-	//PCB1
-	ObtenerRegistros(reg);
-	SolicitarRegistro(new PCB((int*)cb1, NUEVO, reg));
+	SolicitarRegistro(new PCB(this->GetID(), (int*)cb1, NUEVO, reg, ip));
 	//PCB2
-	ObtenerRegistros(reg);
-	SolicitarRegistro(new PCB((int*)cb2, NUEVO, reg));
+	__asm {
+		mov reg[0], ax
+			mov reg[1], bx
+			mov reg[2], cx
+			mov reg[3], dx
+			mov reg[4], si
+			mov reg[5], di
+			mov reg[6], sp
+			mov reg[7], bp
+			mov reg[8], ds
+			mov reg[9], cs
+			mov reg[10], ss
+			mov reg[11], es
+			mov eax, [esp]
+			mov ip, eax
+	}
+	SolicitarRegistro(new PCB(this->GetID(), (int*)cb2, NUEVO, reg, ip));
 	//PCB3
-	ObtenerRegistros(reg);
-	SolicitarRegistro(new PCB((int*)cb3, NUEVO, reg));
+	__asm {
+		mov reg[0], ax
+			mov reg[1], bx
+			mov reg[2], cx
+			mov reg[3], dx
+			mov reg[4], si
+			mov reg[5], di
+			mov reg[6], sp
+			mov reg[7], bp
+			mov reg[8], ds
+			mov reg[9], cs
+			mov reg[10], ss
+			mov reg[11], es
+			mov eax, [esp]
+			mov ip, eax
+	}
+	SolicitarRegistro(new PCB(this->GetID(), (int*)cb3, NUEVO, reg, ip));
 
 	cout << endl;
 	cout << "Presione una tecla para ejecutar los procesos..." << endl;

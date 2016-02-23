@@ -2,7 +2,7 @@
 class PCB
 {
 public:
-	PCB(int *instr, int estado, short paramReg[12]);
+	PCB(int id, int *instr, int estado, short paramReg[12], int ip);
 	~PCB();
 
 	//Variables
@@ -25,6 +25,7 @@ private:
 	short regds;
 	short regss;
 	short reges;
+	int regip;
 #pragma endregion
 public:
 
