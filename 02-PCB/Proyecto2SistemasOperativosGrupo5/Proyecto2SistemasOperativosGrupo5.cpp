@@ -7,7 +7,8 @@
 #include "conio.h"
 #include <iostream>
 using namespace std;
-
+#include <stdlib.h> 
+#include <windows.h> 
 
 
 //PROYECTO 1. CALLBACKS
@@ -154,73 +155,88 @@ private:
 	static void runProceso(PCB *pcb)
 	{
 		int result;
+		int flagnull=0;
 		int *funcion = pcb->funcion;
 		pcb->status = ESTADO_RUN;
-		if (pcb->obj != NULL)
+		if (pcb->status != NULL)
 		{
-			CallBackB *cb = (CallBackB*)(funcion);
-			result = (pcb->obj->**cb)(1);
-			int REGeax = 0, REGebx = 0, REGecx = 0, REGedx = 0;//Registros de propósito general
-			int REGesi = 0, REGedi = 0; //Registros índices o punteros
-			int REGesp = 0, REGebp = 0; //Registros para la pila
-			int REGecs = 0, REGeds = 0, REGees = 0, REGess = 0; //Registros de segmentos de datos
-			_asm {
-				mov REGeax, eax;
-				mov REGebx, ebx;
-				mov REGecx, ecx;
-				mov REGedx, edx;//Registros de propósito general
+			if (pcb->obj != NULL)
+			{
+				CallBackB *cb = (CallBackB*)(funcion);
+				result = (pcb->obj->**cb)(1);
+				int REGeax = 0, REGebx = 0, REGecx = 0, REGedx = 0;//Registros de propósito general
+				int REGesi = 0, REGedi = 0; //Registros índices o punteros
+				int REGesp = 0, REGebp = 0; //Registros para la pila
+				int REGecs = 0, REGeds = 0, REGees = 0, REGess = 0; //Registros de segmentos de datos
+				_asm {
+					mov REGeax, eax;
+					mov REGebx, ebx;
+					mov REGecx, ecx;
+					mov REGedx, edx;//Registros de propósito general
 
-				mov REGesi, esi;
-				mov REGedi, edi; //Registros punteros o índices
+					mov REGesi, esi;
+					mov REGedi, edi; //Registros punteros o índices
 
-				mov REGebp, ebp;
-				mov REGesp, esp; //Registros de pila
+					mov REGebp, ebp;
+					mov REGesp, esp; //Registros de pila
+				}
+
+				cout << "EAX " << REGeax << "\n";
+				cout << "EBX " << REGebx << "\n";
+				cout << "ECX " << REGecx << "\n";
+				cout << "EDX " << REGedx << "\n\n";
+				cout << "ESI " << REGesi << "\n";
+				cout << "EDI " << REGedi << "\n\n";
+				cout << "EBP " << REGebp << "\n";
+				cout << "ESP " << REGesp << "\n\n";
 			}
+			else
+			{
 
-			cout << "EAX " << REGeax << "\n";
-			cout << "EBX " << REGebx << "\n";
-			cout << "ECX " << REGecx << "\n";
-			cout << "EDX " << REGedx << "\n\n";
-			cout << "ESI " << REGesi << "\n";
-			cout << "EDI " << REGedi << "\n\n";
-			cout << "EBP " << REGebp << "\n";
-			cout << "ESP " << REGesp << "\n\n";
+				CallBack cb = (CallBack)*(&funcion);
+				result = cb(0);
+				int REGeax, REGebx, REGecx, REGedx;//Registros de propósito general
+				int REGesi, REGedi; //Registros índices o punteros
+				int REGesp, REGebp; //Registros para la pila
+				int REGecs, REGeds, REGees, REGess; //Registros de segmentos de datos
+				_asm {
+					mov REGeax, eax;
+					mov REGebx, ebx;
+					mov REGecx, ecx;
+					mov REGedx, edx;//Registros de propósito general
+
+					mov REGesi, esi;
+					mov REGedi, edi; //Registros punteros o índices
+
+					mov REGebp, ebp;
+					mov REGesp, esp; //Registros de pila
+				}
+
+				cout << "EAX " << REGeax << "\n";
+				cout << "EBX " << REGebx << "\n";
+				cout << "ECX " << REGecx << "\n";
+				cout << "EDX " << REGedx << "\n\n";
+				cout << "ESI " << REGesi << "\n";
+				cout << "EDI " << REGedi << "\n\n";
+				cout << "EBP " << REGebp << "\n";
+				cout << "ESP " << REGesp << "\n\n";
+				flagnull = 2;
+
+			}
+			pcb->status = DONE;
+
+			cout << "Id " << pcb->getId() << " del Proceso Terminado\nFuncion ejecutada y finalizada: " << result << "\n\n";
 		}
 		else
 		{
-			CallBack cb = (CallBack)*(&funcion);
-			result = cb(0);int REGeax, REGebx, REGecx, REGedx;//Registros de propósito general
-			
-			int REGesi, REGedi; //Registros índices o punteros
-			int REGesp, REGebp; //Registros para la pila
-			int REGecs, REGeds, REGees, REGess; //Registros de segmentos de datos
-			_asm {
-				mov REGeax, eax;
-				mov REGebx, ebx;
-				mov REGecx, ecx;
-				mov REGedx, edx;//Registros de propósito general
-
-				mov REGesi, esi;
-				mov REGedi, edi; //Registros punteros o índices
-
-				mov REGebp, ebp;
-				mov REGesp, esp; //Registros de pila
-			}
-
-			cout << "EAX " << REGeax << "\n";
-			cout << "EBX " << REGebx << "\n";
-			cout << "ECX " << REGecx << "\n";
-			cout << "EDX " << REGedx << "\n\n";
-			cout << "ESI " << REGesi << "\n";
-			cout << "EDI " << REGedi << "\n\n";
-			cout << "EBP " << REGebp << "\n";
-			cout << "ESP " << REGesp << "\n\n";
+			cout << "\n\n NO SE ESTA EJECUTANDO NINGUNA FUNCION. \n\n";
 		}
-		pcb->status = DONE;
+		
+		cout << "\n\n NO SE ESTA EJECUTANDO NINGUNA FUNCION. \n\n";
+		
 
 
-		cout << "Id " << pcb->getId() << " del Proceso Terminado\nFuncion ejecutada y finalizada: " << result << "\n\n";
-	}
+		}
 
 	//Valida si un proceso puede ser ejecutado
 	static int ValidarProceso(PCB *current)
@@ -284,7 +300,19 @@ public:
 		PCB *pcb = new PCB(id_ContProcesos++, READY, callback);
 		int IDProceso = IDProcesoDisponible();
 		this->pcb[IDProceso] = pcb;
+
 		ContProcesos++;
+
+		if (ContProcesos == 10)
+		{
+			ContProcesos = 0;
+		}
+
+		if (id_ContProcesos==10)
+		{
+			id_ContProcesos = 0;
+		}
+
 		return SUCCESSFUL;
 	}
 
@@ -299,6 +327,15 @@ public:
 		int IDProceso = IDProcesoDisponible();
 		this->pcb[IDProceso] = pcb;
 		ContProcesos++;
+		if (ContProcesos == 10)
+		{
+			ContProcesos = 0;
+		}
+		if (id_ContProcesos == 10)
+		{
+			id_ContProcesos = 0;
+		}
+
 		return SUCCESSFUL;
 	}
 
@@ -350,22 +387,22 @@ public:
 
 int main()
 {
+	int contador = 100;
 	Kernel *kernel = new Kernel();
-	kernel->AgregarProceso((int*)&funcion1);
-	kernel->AgregarProceso((int*)&ClaseA::funcion2);
+	ClaseB *obj = new ClaseB();
 	CallBackB cb;
 	ClaseB::setCallBackClaseB(cb);
-	ClaseB *obj = new ClaseB();
-	kernel->AgregarProceso((int*)&cb, obj);
-
-	kernel->RunAll();
-	int contador = 100;
-	
 	while (contador>0)
 	{
+	kernel->AgregarProceso((int*)&funcion1);
+	kernel->AgregarProceso((int*)&ClaseA::funcion2);
+	kernel->AgregarProceso((int*)&cb, obj);
+	kernel->RunAll();
+	
+	
 		contador++;
-		system("pause>nul");
-		kernel->~Kernel();
+		Sleep(5000);
+		//kernel->~Kernel();
 		
 	}
 	
