@@ -22,6 +22,9 @@ public:
 	//Tabla
 	PCB *Head, *Tail;
 
+	static int StaticFunction1();
+
+	static int StaticFunction2();
 
 	int GetID();
 

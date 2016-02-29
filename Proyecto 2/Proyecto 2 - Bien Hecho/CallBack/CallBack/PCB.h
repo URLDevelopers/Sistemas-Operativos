@@ -2,7 +2,7 @@
 class PCB
 {
 public:
-	PCB(int id, int *instr, int estado, short paramReg[12], int ip);
+	PCB(int id, int *instr, int estado, short paramReg[12], int ip, int modo);
 	~PCB();
 
 	//Variables
@@ -10,6 +10,7 @@ private:
 	int id;
 	int *Instruccion;
 	int Estado;
+	int modo;
 	PCB *next;
 	PCB *prev;
 #pragma region Registros
@@ -31,6 +32,8 @@ public:
 
 	//Metodos 
 	int GetId();
+
+	int GetMod();
 
 	int* GetInstruccion();
 

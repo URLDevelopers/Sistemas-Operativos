@@ -3,6 +3,8 @@
 #include <iostream>
 #include "ClassA.h"
 #include "ClassB.h"
+#include <ctime>
+
 
 using namespace std;
 
@@ -22,6 +24,41 @@ Kernel::~Kernel()
 	this->Head = NULL;
 	this->Tail = NULL;
 }
+
+//Funcion1 Proyecto 3
+int Kernel::StaticFunction1()
+{
+	clock_t start, end, quantum = 5;
+	start = clock();
+	while (true)
+	{
+		cout << "1-Func1" << endl;
+		end = clock();
+		if ((end - start) >= quantum)
+		{
+			return 0;
+		}
+	}
+	return 0;
+}
+//Funcion 2 Proyecto 3
+int Kernel::StaticFunction2()
+{
+	clock_t start, end, quantum = 5;
+	start = clock();
+	while (true)
+	{
+		cout << "2-Func2" << endl;
+		end = clock();
+		if ((end - start) >= quantum)
+		{
+			return 0;
+		}
+	}
+	return 0;
+}
+
+
 
 //Solicitar registro disponible de PCB
 bool Kernel::SolicitarRegistro(PCB * nuevo)
@@ -104,17 +141,10 @@ void Kernel::EjecutarProcesos()
 	{
 		ActivarPCB();
 		LiberarRegistro();
-		if (Tail != NULL)
-		{
-			cout << "Para ejecutar el siguiente proceso presione enter ..." << endl;
-		}
-		else
-		{
-			cout << "Ya no existen mas procesos, presione una tecla para continuar..." << endl;
-		}
-		getchar();
 	}
 }
+
+
 
 void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(int))
 {
@@ -125,7 +155,7 @@ void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(
 	
 	short reg[12];
 	int ip;
-	//PCB1
+	/*//PCB1
 	__asm {
 		mov reg[0], ax
 			mov reg[1], bx
@@ -142,7 +172,7 @@ void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(
 			mov eax, [esp]
 			mov ip, eax
 	}
-	SolicitarRegistro(new PCB(this->GetID(), (int*)cb1, NUEVO, reg, ip));
+	SolicitarRegistro(new PCB(this->GetID(), (int*)cb1, NUEVO, reg, ip, 0));
 	//PCB2
 	__asm {
 		mov reg[0], ax
@@ -160,7 +190,7 @@ void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(
 			mov eax, [esp]
 			mov ip, eax
 	}
-	SolicitarRegistro(new PCB(this->GetID(), (int*)cb2, NUEVO, reg, ip));
+	SolicitarRegistro(new PCB(this->GetID(), (int*)cb2, NUEVO, reg, ip, 0));
 	//PCB3
 	__asm {
 		mov reg[0], ax
@@ -178,11 +208,49 @@ void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(
 			mov eax, [esp]
 			mov ip, eax
 	}
-	SolicitarRegistro(new PCB(this->GetID(), (int*)cb3, NUEVO, reg, ip));
+	SolicitarRegistro(new PCB(this->GetID(), (int*)cb3, NUEVO, reg, ip, 0));
+	*/
+	
+	//Proyecto 3
+	__asm {
+		mov reg[0], ax
+			mov reg[1], bx
+			mov reg[2], cx
+			mov reg[3], dx
+			mov reg[4], si
+			mov reg[5], di
+			mov reg[6], sp
+			mov reg[7], bp
+			mov reg[8], ds
+			mov reg[9], cs
+			mov reg[10], ss
+			mov reg[11], es
+			mov eax, [esp]
+			mov ip, eax
+	}
+	SolicitarRegistro(new PCB(this->GetID(), (int*)&StaticFunction1, NUEVO, reg, ip, 1));
+	Sleep(1000);
+	__asm {
+		mov reg[0], ax
+			mov reg[1], bx
+			mov reg[2], cx
+			mov reg[3], dx
+			mov reg[4], si
+			mov reg[5], di
+			mov reg[6], sp
+			mov reg[7], bp
+			mov reg[8], ds
+			mov reg[9], cs
+			mov reg[10], ss
+			mov reg[11], es
+			mov eax, [esp]
+			mov ip, eax
+	}
+	SolicitarRegistro(new PCB(this->GetID(), (int*)&StaticFunction2, NUEVO, reg, ip, 1));
+	Sleep(1000);
+
 
 	cout << endl;
-	cout << "Presione una tecla para ejecutar los procesos..." << endl;
-	getchar();
-	system("cls");
 	EjecutarProcesos();
+	this->EjecutarSistemaOperativo(cb1, cb2, cb3);
 }

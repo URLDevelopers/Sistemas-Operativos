@@ -6,6 +6,9 @@
 #include "ClassA.h"
 #include "ClassB.h"
 #include "Kernel.h"
+#include <ctime>
+#include <thread>
+#include <conio.h>
 
 using namespace std;
 
@@ -17,17 +20,30 @@ static int Funcion1(int par)
 	return par;
 }
 
+void Terminar()
+{
+	char x = getch();
+	if (x == 'f' || x == 'F')
+	{
+		exit(0);
+	}
+}
 
 int main()
 {
-	cout << "Grupo 6" << endl;
 	//Callbacks
 
 	int(*callback1)(int) = &Funcion1;
 	int(*callback2)(int) = &ClassA::Funcion2;
 	int(*callback3)(int) = NULL;
 
+
 	Kernel *Core = new Kernel();
+	thread t1(Core->EjecutarSistemaOperativo);
+	thread t2(Terminar);
+	
+	t1.join();
+	t2.join();
 	Core->EjecutarSistemaOperativo(callback1, callback2, callback3);
 
     return 0;

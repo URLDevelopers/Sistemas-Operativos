@@ -2,7 +2,7 @@
 #include "PCB.h"
 
 //Constructor de la clase
-PCB::PCB(int id, int*instr, int estado, short paramReg[12], int ip)
+PCB::PCB(int id, int*instr, int estado, short paramReg[12], int ip, int modo)
 {
 	this->id = id;
 	this->Instruccion = instr;
@@ -22,6 +22,7 @@ PCB::PCB(int id, int*instr, int estado, short paramReg[12], int ip)
 	this->regss = paramReg[10];
 	this->reges = paramReg[11];
 	this->regip = ip;
+	this->modo = modo;
 }
 
 //Destructor de la clase
@@ -81,6 +82,12 @@ PCB *PCB::GetPrev()
 void PCB::SetPrev(PCB* prev)
 {
 	this->prev = prev;
+}
+
+//Retorna el tipo de proceso //0->Kernel  1->Usuario
+int PCB::GetMod()
+{
+	return this->modo;
 }
 
 
