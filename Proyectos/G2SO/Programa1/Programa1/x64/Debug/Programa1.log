@@ -1,0 +1,8 @@
+﻿Compilación iniciada a las 2/28/2016 11:17:37 PM.
+     1>Proyecto "C:\Users\Pablo\Dropbox\URL\ING EN INFORMATICA Y SISTEMAS\Séptimo Ciclo 2016\Sistemas Operativos\G2SO\Programa1\Programa1\Programa1.vcxproj" en el nodo 2 (Rebuild destinos).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB8020: The builds tools for v140 (Platform Toolset = 'v140') cannot be found. To build using the v140 build tools, either click the Project menu or right-click the solution, and then select "Update VC++ Projects...". Install v140 to build using the v140 build tools.
+     1>Compilación del proyecto terminada "C:\Users\Pablo\Dropbox\URL\ING EN INFORMATICA Y SISTEMAS\Séptimo Ciclo 2016\Sistemas Operativos\G2SO\Programa1\Programa1\Programa1.vcxproj" (Rebuild destinos) -- ERROR.
+
+ERROR al compilar.
+
+Tiempo transcurrido 00:00:00.38
