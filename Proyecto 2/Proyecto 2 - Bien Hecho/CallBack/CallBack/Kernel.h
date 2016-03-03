@@ -22,6 +22,8 @@ public:
 	//Tabla
 	PCB *Head, *Tail;
 
+	static int StaticFunction0();
+
 	static int StaticFunction1();
 
 	static int StaticFunction2();
@@ -34,7 +36,7 @@ public:
 
 	void ActivarPCB();
 
-	void EjecutarSistemaOperativo(int (*cb1)(int), int(*cb2)(int), int(*cb3)(int));
+	void EjecutarSistemaOperativo();
 	
 	void EjecutarProcesos();
 

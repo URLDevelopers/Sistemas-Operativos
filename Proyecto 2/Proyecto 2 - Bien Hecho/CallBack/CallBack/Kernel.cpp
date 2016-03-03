@@ -4,9 +4,13 @@
 #include "ClassA.h"
 #include "ClassB.h"
 #include <ctime>
-
+#include "Timer.h"
 
 using namespace std;
+
+#define MOD_KERNEL 0
+#define MOD_USER 1
+#define QUANTUM 3
 
 //Constructor
 Kernel::Kernel()
@@ -25,35 +29,52 @@ Kernel::~Kernel()
 	this->Tail = NULL;
 }
 
-//Funcion1 Proyecto 3
-int Kernel::StaticFunction1()
+//Funcion 1 Proyecto 3
+int Kernel::StaticFunction0()
 {
-	clock_t start, end, quantum = 5;
-	start = clock();
+	Timer t;
+	unsigned long quantum = QUANTUM;
+	t.Start();
 	while (true)
 	{
-		cout << "1-Func1" << endl;
-		end = clock();
-		if ((end - start) >= quantum)
+		if (t.elapsedTime() >= quantum)
 		{
 			return 0;
 		}
+		cout << "0-Kernel" << endl;
 	}
 	return 0;
 }
+
 //Funcion 2 Proyecto 3
-int Kernel::StaticFunction2()
+int Kernel::StaticFunction1()
 {
-	clock_t start, end, quantum = 5;
-	start = clock();
+	Timer t;
+	unsigned long quantum = QUANTUM;
+	t.Start();
 	while (true)
 	{
-		cout << "2-Func2" << endl;
-		end = clock();
-		if ((end - start) >= quantum)
+		if (t.elapsedTime() >= quantum)
 		{
 			return 0;
 		}
+		cout << "1-Fun1" << endl;
+	}
+	return 0;
+}
+//Funcion 3 Proyecto 3
+int Kernel::StaticFunction2()
+{
+	Timer t;
+	unsigned long quantum = QUANTUM;
+	t.Start();
+	while (true)
+	{
+		if (t.elapsedTime() >= quantum)
+		{
+			return 0;
+		}
+		cout << "2-Fun2" << endl;
 	}
 	return 0;
 }
@@ -146,13 +167,8 @@ void Kernel::EjecutarProcesos()
 
 
 
-void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(int))
+void Kernel::EjecutarSistemaOperativo()
 {
-	
-	ClassB::SetCB3(cb3);
-	Kernel *Core = new Kernel();
-	system("cls");
-	
 	short reg[12];
 	int ip;
 	/*//PCB1
@@ -228,8 +244,7 @@ void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(
 			mov eax, [esp]
 			mov ip, eax
 	}
-	SolicitarRegistro(new PCB(this->GetID(), (int*)&StaticFunction1, NUEVO, reg, ip, 1));
-	Sleep(1000);
+	SolicitarRegistro(new PCB(this->GetID(), (int*)&StaticFunction0, NUEVO, reg, ip, MOD_KERNEL));
 	__asm {
 		mov reg[0], ax
 			mov reg[1], bx
@@ -246,11 +261,26 @@ void Kernel::EjecutarSistemaOperativo(int(*cb1)(int), int(*cb2)(int), int(*cb3)(
 			mov eax, [esp]
 			mov ip, eax
 	}
-	SolicitarRegistro(new PCB(this->GetID(), (int*)&StaticFunction2, NUEVO, reg, ip, 1));
-	Sleep(1000);
-
+	SolicitarRegistro(new PCB(this->GetID(), (int*)&StaticFunction1, NUEVO, reg, ip, MOD_USER));
+	__asm {
+		mov reg[0], ax
+			mov reg[1], bx
+			mov reg[2], cx
+			mov reg[3], dx
+			mov reg[4], si
+			mov reg[5], di
+			mov reg[6], sp
+			mov reg[7], bp
+			mov reg[8], ds
+			mov reg[9], cs
+			mov reg[10], ss
+			mov reg[11], es
+			mov eax, [esp]
+			mov ip, eax
+	}
+	SolicitarRegistro(new PCB(this->GetID(), (int*)&StaticFunction2, NUEVO, reg, ip, MOD_USER));
 
 	cout << endl;
 	EjecutarProcesos();
-	this->EjecutarSistemaOperativo(cb1, cb2, cb3);
+	this->EjecutarSistemaOperativo();
 }

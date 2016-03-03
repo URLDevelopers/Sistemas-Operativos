@@ -9,8 +9,11 @@
 #include <ctime>
 #include <thread>
 #include <conio.h>
+#include <Windows.h>
 
 using namespace std;
+
+
 
 //Funcion no. 1 estatica en todo el programa
 static int Funcion1(int par)
@@ -20,32 +23,26 @@ static int Funcion1(int par)
 	return par;
 }
 
-void Terminar()
+void End()
 {
-	char x = getch();
-	if (x == 'f' || x == 'F')
+	while (true)
 	{
-		exit(0);
+		if (GetAsyncKeyState('f') & 0x8000 || GetAsyncKeyState('F') & 0x8000)
+		{
+			exit(0);
+		}
 	}
 }
 
 int main()
 {
-	//Callbacks
-
-	int(*callback1)(int) = &Funcion1;
-	int(*callback2)(int) = &ClassA::Funcion2;
-	int(*callback3)(int) = NULL;
-
-
-	Kernel *Core = new Kernel();
-	thread t1(Core->EjecutarSistemaOperativo);
-	thread t2(Terminar);
 	
+	Kernel *Core = new Kernel();
+	//Core->EjecutarSistemaOperativo();
+
+	thread t1(End), t2(&Kernel::EjecutarSistemaOperativo, Kernel());
 	t1.join();
 	t2.join();
-	Core->EjecutarSistemaOperativo(callback1, callback2, callback3);
-
     return 0;
 }
 
