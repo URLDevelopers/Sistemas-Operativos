@@ -2,19 +2,19 @@
 #include "PCB.h"
 
 
-PCB::PCB(int id, int*proceso, int estado)
+PCB::PCB(int id, void *process, int estado)
 {
-	this->id = id;
-	this->proceso = proceso;
-	this->Estado = estado;
+	this->Id = id;
+	this->proceso = process;
+	this->status = estado;
 	this->Siguiente = NULL;
 	this->Anterior = NULL;
 }
 
 PCB::~PCB()
 {
-	this->Estado = 0;
-	this->id = 0;
+	this->status = 0;
+	this->Id = 0;
 	this->proceso = NULL;
 	this->Siguiente = NULL;
 	this->Anterior = NULL;
@@ -22,22 +22,22 @@ PCB::~PCB()
 
 int PCB::GetId()
 {
-	return this->id;
+	return this->Id;
 }
 
 void PCB::SetEstado(int estado)
 {
-	this->Estado = estado;
+	this->status = estado;
 }
 
-int* PCB::GetProceso()
+void *PCB::GetProceso()
 {
 	return this->proceso;
 }
 
 int PCB::GetEstado()
 {
-	return this->Estado;
+	return this->status;
 }
 
 PCB *PCB::GetSiguiente()

@@ -81,21 +81,17 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClaseB.h" />
-    <ClInclude Include="ClaseA.h" />
     <ClInclude Include="Kernel.h" />
     <ClInclude Include="PCB.h" />
-    <ClInclude Include="RegistrosCPU.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Thread.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="ClaseB.cpp" />
-    <ClCompile Include="ClaseA.cpp" />
     <ClCompile Include="Kernel.cpp" />
     <ClCompile Include="PCB.cpp" />
     <ClCompile Include="SimuladorSOConsola.cpp" />
@@ -103,6 +99,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Thread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico" />

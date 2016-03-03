@@ -1,21 +1,28 @@
 #pragma once
+#include <iostream>
+#include <Windows.h>
+#include <string.h>
+
+using namespace std;
+
+#define REGS_SIZE 12
+
 class PCB
 {
-public:
-	PCB(int id, int *proceso, int estado);
-	~PCB();
-
 private:
-	int id;
-	int Estado;
-	int* proceso;
+	int Id;
+	int status;
+	void *proceso;
 	PCB *Siguiente;
 	PCB *Anterior;
 
 public:
+	PCB(int id, void *process, int status);
+
+	~PCB();
 	int GetId();
 
-	int* GetProceso();
+	void *GetProceso();
 
 	int GetEstado();
 

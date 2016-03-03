@@ -1,14 +1,38 @@
-﻿  ClassA.cpp
-  Kernel.cpp
-Kernel.cpp(5): fatal error C1083: No se puede abrir el archivo incluir: 'ClassB.h': No such file or directory
+﻿  Kernel.cpp
+Kernel.cpp(64): error C3867: 'PCB::GetEstado': sintaxis no estándar; utilice '&' para crear un puntero al miembro
+Kernel.cpp(64): error C2446: ==': no hay conversión de 'int' en 'int (__thiscall PCB::* )(void)'
+  Kernel.cpp(64): note: No hay conversiones de valores integrales a valores de puntero a miembro
+Kernel.cpp(64): error C2040: '==: 'int (__thiscall PCB::* )(void)' se diferencia en los niveles de direccionamiento indirecto de 'int'
+Kernel.cpp(67): error C3867: 'PCB::GetId': sintaxis no estándar; utilice '&' para crear un puntero al miembro
+Kernel.cpp(67): error C3867: 'PCB::GetProceso': sintaxis no estándar; utilice '&' para crear un puntero al miembro
+  PCB.cpp
   SimuladorSOConsola.cpp
-SimuladorSOConsola.cpp(16): error C2976: 'std::array': no hay suficientes argumentos de plantilla
-  C:\Program Files\Microsoft Visual Studio 14.0\VC\include\utility(306): note: vea la declaración de 'std::array'
-SimuladorSOConsola.cpp(16): error C3699: '^': no se puede utilizar este direccionamiento indirecto en el tipo 'std::array'
-  SimuladorSOConsola.cpp(16): note: el compilador reemplazará '^' por '*' para continuar con el análisis
-SimuladorSOConsola.cpp(22): error C2065: 'Kernel': identificador no declarado
-SimuladorSOConsola.cpp(22): error C2065: 'core': identificador no declarado
-SimuladorSOConsola.cpp(22): error C2061: error de sintaxis: identificador 'Kernel'
-SimuladorSOConsola.cpp(24): error C2653: 'Console': no es un nombre de clase o espacio de nombres
-SimuladorSOConsola.cpp(24): error C3861: 'WriteLine': no se encontró el identificador
+  Thread.cpp
+Thread.cpp(1): warning C4627: '#include "Thread.h"': se omite al buscar el uso del encabezado precompilado
+  Thread.cpp(1): note: Agregar directiva a 'stdafx.h' o recompilar el encabezado precompilado
+Thread.cpp(5): error C2653: 'Thread': no es un nombre de clase o espacio de nombres
+Thread.cpp(6): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+Thread.cpp(8): warning C4508: 'Thread': la función debe devolver un valor; se supone que el tipo de valor devuelto es 'void'
+Thread.cpp(10): error C2653: 'Thread': no es un nombre de clase o espacio de nombres
+Thread.cpp(11): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+Thread.cpp(11): error C2084: la función 'int Thread(void)' ya tiene un cuerpo
+  Thread.cpp(5): note: vea la definición anterior de 'Thread'
+Thread.cpp(15): error C2653: 'Thread': no es un nombre de clase o espacio de nombres
+Thread.cpp(20): error C2653: 'Thread': no es un nombre de clase o espacio de nombres
+Thread.cpp(22): error C2065: 'DWORD': identificador no declarado
+Thread.cpp(22): error C2146: error de sintaxis: falta ';' delante del identificador 'dummy'
+Thread.cpp(22): error C2065: 'dummy': identificador no declarado
+Thread.cpp(23): error C2065: 'COORD': identificador no declarado
+Thread.cpp(23): error C2146: error de sintaxis: falta ';' delante del identificador 'Home'
+Thread.cpp(23): error C2065: 'Home': identificador no declarado
+Thread.cpp(24): error C2065: 'HandleConsoleOut': identificador no declarado
+Thread.cpp(25): error C2065: 'ConsoleBufferInfo': identificador no declarado
+Thread.cpp(25): error C2228: el operando izquierdo de '.dwSize' debe tener class/struct/union
+  Thread.cpp(25): note: el tipo es 'unknown-type'
+Thread.cpp(25): error C2228: el operando izquierdo de '.X' debe tener class/struct/union
+Thread.cpp(25): error C2228: el operando izquierdo de '.Y' debe tener class/struct/union
+Thread.cpp(26): error C2065: 'Home': identificador no declarado
+Thread.cpp(26): error C2065: 'dummy': identificador no declarado
+Thread.cpp(24): error C3861: 'FillConsoleOutputCharacter': no se encontró el identificador
+Thread.cpp(29): error C2653: 'Thread': no es un nombre de clase o espacio de nombres
   Generando código...

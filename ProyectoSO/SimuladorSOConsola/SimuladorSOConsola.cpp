@@ -2,25 +2,34 @@
 
 #include "stdafx.h"
 #include <iostream>
-#include "ClaseA.h"
 #include "Kernel.h"
+
 
 using namespace std;
 
-static int Funcion1(int parametro)
+static void Function1(int parametro)
 {
-	cout << "Funcion 1" << endl;
-	cout << "Parametro: " << parametro << endl;
-	return parametro;
+	while (true)
+	{
+		cout << "Proceso ID: " << parametro << "--Funcion1" << endl;
+	}
 }
 
-int main(array<System::String ^> ^args)
+static void Function2(int parametro)
 {
-	int(*callback1)(int) = &Funcion1;
-	int(*callback2)(int) = &ClassA::Funcion2;
-	int(*callback3)(int) = NULL;
+	while (true)
+	{
+		cout << "Proceso ID: " << parametro << "--Funcion2" << endl;
+	}
+}
 
-	Kernel *core = new Kernel();
-	core->EjecutarCore(callback1, callback2, callback3);
+int main()	//Thread one
+{
+
+	Kernel core;
+	core.RegistrarPCB(&Function1);
+	core.RegistrarPCB(&Function2);
+	core.RunCore();	//Thread Two
+
     return 0;
 }

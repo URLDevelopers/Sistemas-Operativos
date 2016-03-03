@@ -1,83 +1,121 @@
 #include "stdafx.h"
 #include "Kernel.h"
 #include <iostream>
-#include "ClaseA.h"
-#include "ClaseB.h"
+#include <conio.h>
 
 using namespace std;
 
 Kernel::Kernel()
 {
-	Id = 0;
-	Table = NULL;
-	SizeCore = 0;
+	ThreadID = 0;
+	HeadTable = NULL;
+	TailTable = NULL;
+	SizeTable = 0;
 }
 
 
 Kernel::~Kernel()
 {
-	Id = 0;
-	SizeCore = 0;
-	Table = NULL;
+	ThreadID = 0;
+	SizeTable = 0;
+	HeadTable->~PCB();
+	TailTable->~PCB();
 }
 
-//Solicitud PCB
-bool Kernel::RegistrarPCB(PCB * nuevo)
+
+bool Kernel::RegistrarPCB(void *Function1)
 {
-	if (SizeCore >= SIZE)
+	ThreadID++;
+	PCB *nuevo = new PCB(ThreadID, (int*)Function1, NEW_PROCESS);
+	if (SizeTable >= SIZE)
 	{
 		return false;
 	}
-	if (Table == NULL)
+	if (HeadTable == NULL)
 	{
-		Table = nuevo;
-		Table->SetSiguiente(Table);
-		Table->SetAnterior(Table);
+		HeadTable = nuevo;
+		HeadTable->SetEstado(READY);
+		HeadTable->SetSiguiente(HeadTable);
+		HeadTable->SetAnterior(HeadTable);
 	}
 	else
 	{
-		nuevo->SetSiguiente(Table);
-		nuevo->SetAnterior(Table->GetAnterior());
-		Table->GetAnterior()->SetSiguiente(nuevo);
-		Table->SetAnterior(nuevo);
-		Table = nuevo;
+		nuevo->SetSiguiente(HeadTable);
+		nuevo->SetAnterior(HeadTable->GetAnterior());
+		HeadTable->GetAnterior()->SetSiguiente(nuevo);
+		HeadTable->SetAnterior(nuevo);
+		HeadTable = nuevo;
+		HeadTable->SetEstado(READY);
 	}
-	SizeCore++;
+	SizeTable++;
 	return true;
+}
+
+void Kernel::RunCore()
+{
+	int         KeyInfo;
+	PCB *aux = HeadTable;
+
+	do
+	{
+		cout << "Thread ID: " << 0 << "--Funcion1" << endl;
+
+		KeyInfo = _getch();
+		if (SizeTable > 0 && aux->GetEstado == READY)
+		{
+			aux->SetEstado(RUNNING);
+			Hilos.CreateThread(aux->GetId, aux->GetProceso);
+
+			aux = aux->GetSiguiente();
+		}
+	} while (tolower(KeyInfo) != 'f');
+
+	ShutDown();
+}
+
+void Kernel::ShutDown(void) // Shut down threads 
+{
+	while (ThreadID > 0)
+	{
+		// Tell thread to die.
+		ThreadID--;
+	}
+
+	// Clean up display when done
+	Hilos.ClearScreen();
 }
 
 int Kernel::GetId()
 {
-	Id++;
-	return Id;
+	return 0;
 }
 
 bool Kernel::LiberarPCB(PCB *nodo)
 {
-	if (SizeCore == 1)
+	if (SizeTable == 1)
 	{
-		if (Table == nodo)
+		if (HeadTable == nodo)
 		{
-			Table->~PCB();
-			Table = NULL;
-			SizeCore--;
+			HeadTable->~PCB();
+			HeadTable = NULL;
+			SizeTable--;
 			return true;
 		}
 		return false;
 	}
 	else
 	{
-		PCB *aux = Table;
-		for (int i = 0; i < SizeCore; i++)
+		PCB *aux = HeadTable;
+		for (int i = 0; i < SizeTable; i++)
 		{
 			if (aux == nodo)
 			{
 				aux->GetAnterior()->SetSiguiente(aux->GetSiguiente());
 				aux->GetSiguiente()->SetAnterior(aux->GetAnterior());
-				SizeCore--;
-				if (aux == Table)
+				SizeTable--;
+				if (aux == HeadTable)
 				{
-					Table = Table->GetSiguiente();
+					HeadTable = HeadTable->GetSiguiente();
 				}
 				aux->~PCB();
 				return true;
@@ -85,52 +123,5 @@ bool Kernel::LiberarPCB(PCB *nodo)
 			aux = aux->GetSiguiente();
 		}
 		return false;
-	}
-}
-
-void Kernel::ActivarPCB(PCB *nodo)
-{
-	int *funcion = nodo->GetProceso();
-	typedef int(*Metodo)(int);
-	Metodo RealizarFuncion = (Metodo)*(&funcion);
-	nodo->SetEstado(EJECUCION);
-	RealizarFuncion(nodo->GetId());
-	nodo->SetEstado(TERMINADO);
-}
-
-void Kernel::EjecutarCore(int(*cb1)(int), int(*cb2)(int), int(*cb3)(int))
-{
-	ClassB::SetCallback3(cb3);
-	Kernel *Core = new Kernel();
-	char ej = '1';
-	while (ej == '1')
-	{
-		system("cls");
-		PCB *pcb1 = new PCB(Core->GetId(), (int*)cb1, NUEVO);
-		PCB *pcb2 = new PCB(Core->GetId(), (int*)cb2, NUEVO);
-		PCB *pcb3 = new PCB(Core->GetId(), (int*)cb3, NUEVO);
-		RegistrarPCB(pcb1);
-		RegistrarPCB(pcb2);
-		RegistrarPCB(pcb3);
-		ActivarPCB(pcb1);
-		ActivarPCB(pcb2);
-		ActivarPCB(pcb3);
-		LiberarPCB(pcb1);
-		LiberarPCB(pcb2);
-		LiberarPCB(pcb3);
-		cin >> ej;
-		if (ej != '1')
-		{
-			break;
-		}
-	}
-}
-
-void Kernel::assembler()
-{
-	__asm
-	{
-		mov al, 2
-		mov dx, ax
 	}
 }
