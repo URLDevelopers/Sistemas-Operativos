@@ -41,7 +41,7 @@ using namespace std;
 #define EXTRA_REGS 3
 #define TOTAL_REGS (REGS_NUM + EXTRA_REGS);
 
-#define QUANTUM 1
+#define QUANTUM 3000
 
 #pragma endregion
 
@@ -74,6 +74,8 @@ class Kernel
 {
 private:
 
+	int currentPCB;
+
 	///<summary>Valida si un proceso nuevo puede ser agregado en la posicion
 	///</param name = "index">Indice en que se quiere insertar el proceso</param>
 	///<para><returns>Entero que inidica el resultado</returns></para></summary>
@@ -102,7 +104,11 @@ private:
 	///<para><returns>Si el resultado es -1, el proceso con dicho identificador no se encuentra en la tabla</retruns></para></summary>
 	int getProcessIndex(int id);
 
+	void createTimer();
+
 public:
+	HANDLE gDoneEvent;
+
 	Timer timer;
 
 	///<summary>Tabla de Control de Procesos<para>El tamaño se indica segun el valor de MAX
@@ -143,7 +149,7 @@ public:
 
 	///<summary>Ejecuta todos los procesos en la Tabla de Control de Procesos
 	///<para><returns>Resultado de la ejecucion de todos los procesos</returns></para>
-	int runAllProcesses(LPTHREAD_START_ROUTINE function, Kernel *kernel);
+	int runAllProcesses();
 
 	///<summary>Elimina un proceso en el indice indicado
 	///<param name = "index">El valor de la posicion a eliminar</param>
@@ -154,5 +160,11 @@ public:
 	///<param name = "id">El identificador del proceso a eliminar</param>
 	///<para><returns>Retorna el resultado de la eliminacion del proceso</returns></para></summary>
 	int killProcessById(int id);
+
+	PCB *getCurrentPCB();
+
+	int nextPCB();
+
+	Kernel &operator+=(const LPTHREAD_START_ROUTINE &function);
 };
 

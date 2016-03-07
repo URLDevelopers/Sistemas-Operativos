@@ -6,7 +6,7 @@
 #include <Windows.h>
 #include "Kernel.h"
 
-#define SLEEP_TIME 75
+#define SLEEP_TIME 1000
 #define REGS_SIZE 16
 #define REGS_NUM 9
 #define SUCCESSFUL 0
@@ -32,47 +32,49 @@ DWORD WINAPI f2(LPVOID lpParameter)
 	}
 }
 
-DWORD WINAPI kernelProcess(LPVOID param)
-{
-	Kernel *k = (Kernel*)param;
-	int i = 0;
-	while (!GetAsyncKeyState('F'))
-	{
-		if (k->pcb[i] != NULL)
-			switch (k->pcb[i]->status)
-			{
-			case RUNNING:
-				if (k->timer.isTimeOut(QUANTUM))
-				{
-					k->pcb[i]->suspend(READY);
-					i = (i + 1) % MAX;
-				}
-				break;
-			case SUSPENDED:
-			case READY:
-				k->pcb[i]->resume();
-				k->timer.start();
-				break;
-			case DONE:
-				k->killProcessAt(i);
-				break;
-			case NEW_PROCESS:
-				k->pcb[i]->admit();
-				k->timer.start();
-				break;
-			}
-		else
-			i = (i + 1) % MAX;
-	}
-	return 0;
-}
+//DWORD WINAPI kernelProcess(LPVOID param)
+//{
+//	Kernel *k = (Kernel*)param;
+//	int i = 0;
+//	while (!GetAsyncKeyState('F'))
+//	{
+//		if (k->pcb[i] != NULL)
+//			switch (k->pcb[i]->status)
+//			{
+//			case RUNNING:
+//				if (QUANTUM <= k->timer.elapsedTime())
+//				{
+//					k->pcb[i]->suspend(READY);
+//					i = (i + 1) % MAX;
+//				}
+//				break;
+//			case SUSPENDED:
+//			case READY:
+//				k->pcb[i]->resume();
+//				k->timer.start();
+//				break;
+//			case DONE:
+//				k->killProcessAt(i);
+//				break;
+//			case NEW_PROCESS:
+//				k->pcb[i]->admit();
+//				k->timer.start();
+//				break;
+//			}
+//		else
+//			i = (i + 1) % MAX;
+//	}
+//	return 0;
+//}
 
 int main()
 {
+	system("color f0");
 	Kernel *kernel = new Kernel();
 	kernel->addProcess(f1, NULL);
 	kernel->addProcess(f2, NULL);
-	kernel->runAllProcesses(kernelProcess, kernel);
+
+	kernel->runAllProcesses();
 	
     return 0;
 }

@@ -26,36 +26,36 @@ int PCB::getId()
 int PCB::suspend()
 {
 	int *aux = this->memory;
-	_asm
-	{
-	//	PUSHFD;
-	//	PUSHAD;
+	//_asm
+	//{
+	////	PUSHFD;
+	////	PUSHAD;
+	////	MOV EAX, aux;
+	////	/*MOV[EAX], CS;
+	////	ADD EAX, 4;*/
+	////	MOV[EAX], DS;
+	////	ADD EAX, 4;
+	////	MOV[EAX], ES;
+	////	ADD EAX, 4;
+	////	MOV[EAX], SS;
+	////	ADD EAX, 4;
+	////	MOV ECX, REGS_NUM;
+	////beginLoop:
+	////	POP[EAX];
+	////	ADD EAX, 2;
+	////	POP[EAX];
+	////	ADD EAX, 2;
+	////	LOOP beginLoop;
+	//	PUSH EAX;
 	//	MOV EAX, aux;
-	//	/*MOV[EAX], CS;
-	//	ADD EAX, 4;*/
-	//	MOV[EAX], DS;
+	//	MOV[EAX], EBX;
 	//	ADD EAX, 4;
-	//	MOV[EAX], ES;
+	//	MOV[EAX], ECX;
 	//	ADD EAX, 4;
-	//	MOV[EAX], SS;
+	//	MOV[EAX], EDX;
 	//	ADD EAX, 4;
-	//	MOV ECX, REGS_NUM;
-	//beginLoop:
 	//	POP[EAX];
-	//	ADD EAX, 2;
-	//	POP[EAX];
-	//	ADD EAX, 2;
-	//	LOOP beginLoop;
-		PUSH EAX;
-		MOV EAX, aux;
-		MOV[EAX], EBX;
-		ADD EAX, 4;
-		MOV[EAX], ECX;
-		ADD EAX, 4;
-		MOV[EAX], EDX;
-		ADD EAX, 4;
-		POP[EAX];
-	}
+	//}
 	changeStatus(SUSPENDED);
 	return SUCCESSFUL;
 }
@@ -101,44 +101,44 @@ int PCB::resume()
 {
 	int *aux = this->memory;
 	int begin = (REGS_NUM + EXTRA_REGS) * sizeof(int);
-	__asm
-	{
+	//__asm
+	//{
+	////	MOV EAX, aux;
+	////	ADD EAX, begin;
+	////	MOV ECX, REGS_NUM + 1;
+	////	/*PUSH ESP;
+	////	PUSH ESI;
+	////	PUSH EDI;
+	////	PUSH EBP;*/
+	////loopBegin:
+	////	PUSH[EAX];
+	////	SUB EAX, 4;
+	////	LOOP loopBegin;
+	////	POPAD;
+	////	POPFD;
+	////	/*POP EBP;
+	////	POP EDI;
+	////	POP ESI;
+	////	POP ESP;*/
+	////	PUSH EAX;
+	////	/*MOV EBP, EDI;*/
+	////	MOV EAX, aux;
+	////	ADD EAX, 4;
+	////	MOV[EAX], SS;
+	////	ADD EAX, 4;
+	////	MOV[EAX], ES;
+	////	ADD EAX, 4;
+	////	MOV[EAX], DS;
+	////	POP EAX;
 	//	MOV EAX, aux;
-	//	ADD EAX, begin;
-	//	MOV ECX, REGS_NUM + 1;
-	//	/*PUSH ESP;
-	//	PUSH ESI;
-	//	PUSH EDI;
-	//	PUSH EBP;*/
-	//loopBegin:
-	//	PUSH[EAX];
-	//	SUB EAX, 4;
-	//	LOOP loopBegin;
-	//	POPAD;
-	//	POPFD;
-	//	/*POP EBP;
-	//	POP EDI;
-	//	POP ESI;
-	//	POP ESP;*/
-	//	PUSH EAX;
-	//	/*MOV EBP, EDI;*/
-	//	MOV EAX, aux;
+	//	MOV EBX, [EAX];
 	//	ADD EAX, 4;
-	//	MOV[EAX], SS;
+	//	MOV ECX, [EAX];
 	//	ADD EAX, 4;
-	//	MOV[EAX], ES;
+	//	MOV EDX, [EAX];
 	//	ADD EAX, 4;
-	//	MOV[EAX], DS;
-	//	POP EAX;
-		MOV EAX, aux;
-		MOV EBX, [EAX];
-		ADD EAX, 4;
-		MOV ECX, [EAX];
-		ADD EAX, 4;
-		MOV EDX, [EAX];
-		ADD EAX, 4;
-		MOV EAX, [EAX];
-	}
+	//	MOV EAX, [EAX];
+	//}
 	changeStatus(RUNNING);
 	return SUCCESSFUL;
 }
@@ -173,7 +173,7 @@ void PCB::changeStatus(int status)
 
 int PCB::admit()
 {
-	for (int i = 0; i < MAX; i++)
+	for (int i = 0; i < REGS_SIZE; i++)
 		this->memory[i] = 0;
 	ResumeThread(handle);
 	this->status = RUNNING;
@@ -182,7 +182,7 @@ int PCB::admit()
 
 Kernel::Kernel()
 {
-	this->count = 0;
+	this->count = this->currentPCB = 0;
 	for (int i = 0; i < MAX; i++)
 		this->pcb[i] = NULL;
 }
@@ -302,12 +302,126 @@ int Kernel::runProcessById(int id)
 	return SUCCESSFUL;
 }
 
-int Kernel::runAllProcesses(LPTHREAD_START_ROUTINE function, Kernel *kernel)
+PCB *Kernel::getCurrentPCB()
 {
-	HANDLE handle = CreateThread(NULL, 0, function, kernel, 0, 0);
-	WaitForSingleObject(handle, 0);
-	system("pause >nul");
+	return pcb[currentPCB];
+}
+
+int Kernel::nextPCB()
+{
+	return currentPCB = (currentPCB + 1) % MAX;
+}
+
+DWORD WINAPI kernelProcess(LPVOID param)
+{
+	Kernel *k = (Kernel*)param;
+	int i = 0;
+	while (!GetAsyncKeyState('F'))
+	{
+		if (k->pcb[i] != NULL)
+			switch (k->pcb[i]->status)
+			{
+			case RUNNING:
+				if (QUANTUM <= k->timer.elapsedTime())
+				{
+					printf("0 - Kernel\n");
+					k->pcb[i]->suspend(READY);
+					i = (i + 1) % MAX;
+				}
+				break;
+			case SUSPENDED:
+			case READY:
+				k->pcb[i]->resume();
+				k->timer.start();
+				break;
+			case DONE:
+				k->killProcessAt(i);
+				break;
+			case NEW_PROCESS:
+				k->pcb[i]->admit();
+				k->timer.start();
+				break;
+			}
+		else
+			i = (i + 1) % MAX;
+	}
+	return 0;
+}
+
+void CALLBACK timerRoutine(PVOID lpParam, BOOLEAN timerOrWaitFired)
+{
+	if (NULL != lpParam)
+	{
+		Kernel *kernel = (Kernel*)lpParam;
+		printf("0 - Kernel\n");
+		PCB *pcb = kernel->getCurrentPCB();
+		if (pcb != NULL && pcb->status == RUNNING)
+		{
+			pcb->suspend();
+			kernel->nextPCB();
+		}
+		else
+		{
+			kernel->nextPCB();
+		}
+		
+		SetEvent(kernel->gDoneEvent);
+	}
+}
+
+int Kernel::runAllProcesses()
+{
+	//HANDLE handle = CreateThread(NULL, 0, kernelProcess, this, 0, 0);
+	//WaitForSingleObject(handle, 0);
+	while (!GetAsyncKeyState('F'))
+	{
+		PCB *pcb = getCurrentPCB();
+		if (NULL != pcb)
+		{
+			switch (pcb->status)
+			{
+			case SUSPENDED:
+			case READY:
+				pcb->resume();
+				createTimer();
+				break;
+			case DONE:
+				this->killProcessAt(currentPCB);
+				break;
+			case NEW_PROCESS:
+				pcb->admit();
+				createTimer();
+				break;
+			default:
+				break;
+			}
+		}
+		else
+		{
+			this->nextPCB();
+		}
+	}
+	//system("pause >nul");
 	return SUCCESSFUL;
+}
+
+void Kernel::createTimer()
+{
+	HANDLE hTimer = NULL;
+	HANDLE hTimerQueue = NULL;
+
+	gDoneEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
+
+	hTimerQueue = CreateTimerQueue();
+
+	CreateTimerQueueTimer(&hTimer, hTimerQueue, 
+		(WAITORTIMERCALLBACK)timerRoutine, this, QUANTUM, 0, 0);
+
+	WaitForSingleObject(gDoneEvent, INFINITE);
+
+	CloseHandle(gDoneEvent);
+
+	DeleteTimerQueue(hTimerQueue);
 }
 
 int Kernel::killProcessAt(int index)
@@ -330,4 +444,12 @@ int Kernel::killProcessById(int id)
 	killProcessAt(index);
 	return SUCCESSFUL;
 }
+
+Kernel &Kernel::operator+=(const LPTHREAD_START_ROUTINE &function)
+{
+	this->pcb[count++] = new PCB(NEW_PROCESS, function, NULL);
+	return *this;
+}
+
+
 
