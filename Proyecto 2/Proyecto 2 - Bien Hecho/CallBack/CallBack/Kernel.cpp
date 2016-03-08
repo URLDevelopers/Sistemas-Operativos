@@ -62,6 +62,7 @@ int Kernel::StaticFunction1()
 	}
 	return 0;
 }
+
 //Funcion 3 Proyecto 3
 int Kernel::StaticFunction2()
 {
@@ -78,8 +79,6 @@ int Kernel::StaticFunction2()
 	}
 	return 0;
 }
-
-
 
 //Solicitar registro disponible de PCB
 bool Kernel::SolicitarRegistro(PCB * nuevo)
@@ -165,68 +164,11 @@ void Kernel::EjecutarProcesos()
 	}
 }
 
-
-
 void Kernel::EjecutarSistemaOperativo()
 {
 	short reg[12];
 	int ip;
-	/*//PCB1
-	__asm {
-		mov reg[0], ax
-			mov reg[1], bx
-			mov reg[2], cx
-			mov reg[3], dx
-			mov reg[4], si
-			mov reg[5], di
-			mov reg[6], sp
-			mov reg[7], bp
-			mov reg[8], ds
-			mov reg[9], cs
-			mov reg[10], ss
-			mov reg[11], es
-			mov eax, [esp]
-			mov ip, eax
-	}
-	SolicitarRegistro(new PCB(this->GetID(), (int*)cb1, NUEVO, reg, ip, 0));
-	//PCB2
-	__asm {
-		mov reg[0], ax
-			mov reg[1], bx
-			mov reg[2], cx
-			mov reg[3], dx
-			mov reg[4], si
-			mov reg[5], di
-			mov reg[6], sp
-			mov reg[7], bp
-			mov reg[8], ds
-			mov reg[9], cs
-			mov reg[10], ss
-			mov reg[11], es
-			mov eax, [esp]
-			mov ip, eax
-	}
-	SolicitarRegistro(new PCB(this->GetID(), (int*)cb2, NUEVO, reg, ip, 0));
-	//PCB3
-	__asm {
-		mov reg[0], ax
-			mov reg[1], bx
-			mov reg[2], cx
-			mov reg[3], dx
-			mov reg[4], si
-			mov reg[5], di
-			mov reg[6], sp
-			mov reg[7], bp
-			mov reg[8], ds
-			mov reg[9], cs
-			mov reg[10], ss
-			mov reg[11], es
-			mov eax, [esp]
-			mov ip, eax
-	}
-	SolicitarRegistro(new PCB(this->GetID(), (int*)cb3, NUEVO, reg, ip, 0));
-	*/
-	
+
 	//Proyecto 3
 	__asm {
 		mov reg[0], ax

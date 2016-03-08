@@ -1,0 +1,6 @@
+c:\users\francisco\documents\visual studio 2015\Projects\Worker\Worker\bin\Debug\Worker.exe.config
+c:\users\francisco\documents\visual studio 2015\Projects\Worker\Worker\bin\Debug\Worker.exe
+c:\users\francisco\documents\visual studio 2015\Projects\Worker\Worker\bin\Debug\Worker.pdb
+c:\users\francisco\documents\visual studio 2015\Projects\Worker\Worker\obj\Debug\Worker.csprojResolveAssemblyReference.cache
+c:\users\francisco\documents\visual studio 2015\Projects\Worker\Worker\obj\Debug\Worker.exe
+c:\users\francisco\documents\visual studio 2015\Projects\Worker\Worker\obj\Debug\Worker.pdb

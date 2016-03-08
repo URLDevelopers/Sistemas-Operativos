@@ -23,6 +23,7 @@ static int Funcion1(int par)
 	return par;
 }
 
+//Finalizar programa con tecla F
 void End()
 {
 	while (true)
@@ -36,10 +37,6 @@ void End()
 
 int main()
 {
-	
-	Kernel *Core = new Kernel();
-	//Core->EjecutarSistemaOperativo();
-
 	thread t1(End), t2(&Kernel::EjecutarSistemaOperativo, Kernel());
 	t1.join();
 	t2.join();
