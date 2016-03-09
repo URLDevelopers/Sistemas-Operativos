@@ -1,37 +1,71 @@
-# Sistemas-Operativos
-Repositorio creado para los proyectos de la clase Sistemas Operativos. Primer ciclo 2016. Universidad Rafael Landivar, Guatemala.
+###### Sistemas-Operativos
+# Repositorio creado para los proyectos de la clase Sistemas Operativos. Primer ciclo 2016. Universidad Rafael Landivar, Guatemala.
 
-GRUPO I
+## GRUPO I
 
-1	David Meneses Villagrán	1115212
+	1. 	David Meneses Villagrán	1115212
 
-2	Daniel Mejía Alvarado	1358213
+	2. 	Daniel Mejía Alvarado	1358213
 
-3	Mario Villanueva Martínez	1265513
+	3. 	Mario Villanueva Martínez	1265513
 
-4	Diego Alvarez Mendoza	1166513
+	4. 	Diego Alvarez Mendoza	1166513
 
-5	Pablo Damián Mejía	1148012
+	5. 	Pablo Damián Mejía	1148012
 
-6	Alejandro Herrera Hernández	1219813
+	6. 	Alejandro Herrera Hernández	1219813
 
-La última versión contiene Threads, manejados con la Api de Win32. Esta es la forma en que se simula el tiempo asignado a cada proceso (función).
-El proceso de Kernel se ejecuta en todo momento y es ahí donde se decide el momento en que cada proceso debe ejecutarse según el quantum asignado -revisar el macro QUANTUM en Kernel.h para conocer su valor-.
-La función de Kernel es estática, por ende debe enviarse el kernel como parametro para el trabajo dentro de la función.
+### Submodelos:
 
-Cambios en la Versión 1.1 (18/02/2016):
+	- ** Callbacks: ** contiene la versión inicial del proyecto. No existe la simulación de multiprogramación.
+	- ** Threads: ** primera implementación de multiprogramación por medio del manejo de hilos con WINAPI. A partir de esta versión todas las funciones deben ser estáticas.
+		* Versión descontinuada
+	- ** Kernel: ** * (versión actual) * Se continúa con la simulación mediante hilos pero con la simulación de una interrupción de timer.
+	
+### Descripción:
 
-	- La clase Kernel y PCB se encuentran definidas dentro del mismo archivo de encabezado (header file): Kernel.h.
+Este proyecto simula la multiprogramación de los procesos manejada por un sistema operativos. El fin de este proyecto es solamente para fines educativos * (por el momento) * y solamente es posible apreciar su funcionamiento, pero no manipular su manejo mas que por código. 
+El planificador actual no es un objeto, solamente es un algoritmo dentro del kernel.
 
-	- El manejo ya no es mediante callbacks, sino mediante threads con timer.
+### Ejemplos de código:
 
-		*El timer es la simulacion de una interrupcion mediante un hilo que se llama luego de un tiempo especificado (el quantum)
-		
-	- Se ha eliminado el soporte a las funciones no estáticas (que requieren la inicialización de un objeto para su ejecución). En cambio, es recomendable crear una función estática que reciba al objeto como parametro.
+El siguiente ejemplo muestra como agregar una función, la cual toma como parametro un número entero, al kernel y luego ejecuta todos los procesos
 
-		* Es necesario revisar la documentación de WinApi.h y el manejo de hilos (threads) para comprender este concepto.
+```
+DWORD WINAPI func(LPVOID param)
+{
+	int x = (int)param;
+	cout << "Hi! The param sent is: " << x << endl;
+	return 0;
+}
 
-	- Los registros son guardados (por medio de simulación) por cada función
-		
-		* Los únicos registros utilizados son los de propósito general, esto se debe al bloqueo por parte del sistema operativo en posiciones de memoria y al manejo de hilos por parte de este
-		-->Investigar<--
+int main()
+{
+	Kernel *kernel = new Kernel();
+	
+	int x = 3;
+	
+	PCB pcb(func, 3);
+	
+	kernel->registerObserver(pcb);
+	
+	kernel->runAllProcesses();
+	
+	return 0;
+}
+```
+
+La salida del programa será * debe presionar la tecla F para salir *:
+
+```
+Hi! The param sent is: 3;
+0 - Kernel
+0 - Kernel
+0 - Kernel
+...
+```
+
+### Por hacer:
+
+	- [ ] Implementar el planificador como objeto y comportamiento
+	- [ ] Asegurarse que solo exista un kernel * (Singleton Pattern) *
