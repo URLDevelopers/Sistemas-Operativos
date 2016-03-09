@@ -1,5 +1,5 @@
 ###### Sistemas-Operativos
-# Repositorio creado para los proyectos de la clase Sistemas Operativos. Primer ciclo 2016. Universidad Rafael Landivar, Guatemala.
+__ Repositorio creado para los proyectos de la clase Sistemas Operativos. Primer ciclo 2016. Universidad Rafael Landivar, Guatemala.__
 
 ## GRUPO I
 
@@ -17,10 +17,10 @@
 
 ### Submodelos:
 
-	- ** Callbacks: ** contiene la versión inicial del proyecto. No existe la simulación de multiprogramación.
-	- ** Threads: ** primera implementación de multiprogramación por medio del manejo de hilos con WINAPI. A partir de esta versión todas las funciones deben ser estáticas.
+	- __ Callbacks: __ contiene la versión inicial del proyecto. No existe la simulación de multiprogramación.
+	- __ Threads: __ primera implementación de multiprogramación por medio del manejo de hilos con WINAPI. A partir de esta versión todas las funciones deben ser estáticas.
 		* Versión descontinuada
-	- ** Kernel: ** * (versión actual) * Se continúa con la simulación mediante hilos pero con la simulación de una interrupción de timer.
+	- __ Kernel: __ _ (versión actual) _ Se continúa con la simulación mediante hilos pero con la simulación de una interrupción de timer.	
 	
 ### Descripción:
 
@@ -68,4 +68,6 @@ Hi! The param sent is: 3;
 ### Por hacer:
 
 	- [ ] Implementar el planificador como objeto y comportamiento
-	- [ ] Asegurarse que solo exista un kernel * (Singleton Pattern) *
+	- [ ] Asegurarse que solo exista un kernel _ (Singleton Pattern) _
+	- [ ] Hacer una interfaz de usuario
+	- [ ] Seguir las directivas para el siguiente proyecto
