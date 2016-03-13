@@ -10,7 +10,7 @@ using namespace std;
 
 #define MOD_KERNEL 0
 #define MOD_USER 1
-#define QUANTUM 3
+#define QUANTUM 3000
 
 //Constructor
 Kernel::Kernel()
