@@ -1,3 +1,10 @@
-﻿  stdafx.cpp
-  P4Conmutation.cpp
+﻿  Kernel.cpp
+c:\program files (x86)\windows kits\8.1\include\um\winnt.h(9107): warning C4005: 'DELETE': macro redefinition
+  c:\users\francisco\documents\github\sistemas-operativos\proyecto 4\p4conmutation\p4conmutation\pcb.h(8): note: see previous definition of 'DELETE'
+c:\users\francisco\documents\github\sistemas-operativos\proyecto 4\p4conmutation\p4conmutation\kernel.cpp(7): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\francisco\documents\github\sistemas-operativos\proyecto 4\p4conmutation\p4conmutation\kernel.cpp(8): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\francisco\documents\github\sistemas-operativos\proyecto 4\p4conmutation\p4conmutation\kernel.cpp(140): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\francisco\documents\github\sistemas-operativos\proyecto 4\p4conmutation\p4conmutation\kernel.cpp(141): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\francisco\documents\github\sistemas-operativos\proyecto 4\p4conmutation\p4conmutation\kernel.cpp(155): warning C4553: '==': operator has no effect; did you intend '='?
+c:\users\francisco\documents\github\sistemas-operativos\proyecto 4\p4conmutation\p4conmutation\kernel.cpp(189): warning C4717: 'Kernel::ExecuteSO': recursive on all control paths, function will cause runtime stack overflow
   P4Conmutation.vcxproj -> C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\P4Conmutation\Debug\P4Conmutation.exe

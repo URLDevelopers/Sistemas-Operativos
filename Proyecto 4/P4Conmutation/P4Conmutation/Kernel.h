@@ -2,6 +2,8 @@
 #include "PCB.h"
 #include "Timer.h"
 #include <iostream>
+#include <Windows.h>
+
 using namespace std;
 
 
@@ -11,17 +13,15 @@ class Kernel
 public:
 	//Variables
 	PCB *Tail, *Head;
-
-	const unsigned long quantum = 5;
+	const unsigned long quantum = 1;
 	int idcounter;
 
 	//Methods
 	Kernel();
 	~Kernel();
 
-
 	//Static function
-	static void StaticFunction(char c, unsigned long q);
+	static void StaticFunction(char c, unsigned long q, short x);
 
 	//Set id for PCB
 	int NewID();
@@ -30,7 +30,7 @@ public:
 
 	bool DeletePCB(char c);
 
-	void ExectutePCB(PCB * nodo);
+	void ExectutePCB(PCB * nodo, int x);
 
 	void ChangeQuantum(char c, unsigned long newquantum);
 

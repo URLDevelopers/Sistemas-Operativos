@@ -9,7 +9,6 @@ Kernel::Kernel()
 	this->idcounter = 0;
 }
 
-
 Kernel::~Kernel()
 {
 	this->Head = NULL;
@@ -22,14 +21,29 @@ int Kernel::NewID()
 	return idcounter++;
 }
 
-void Kernel::StaticFunction(char c, unsigned long q)
+void Kernel::StaticFunction(char c, unsigned long q, short x)
 {
 	Timer *temp = new Timer();
 	temp->Start();
-	cout << c << endl;
-	while (!temp->isTimeout(q))
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x, 0 });
+	cout << c;
+	while (true)
 	{
-		break;
+		if (!temp->isTimeout(q))
+		{
+			//LamarMetodo()
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x, 0 });
+			cout << " ";
+			break;
+		}
+		if (GetAsyncKeyState(VK_ADD) & 0x8000) //VK_ADD ascii of '+'
+		{
+			//string++;
+			//if(enter)
+			//{ AgregarProcesoNuevo() }
+
+			exit(0);
+		}
 	}
 }
 
@@ -58,7 +72,7 @@ PCB * Kernel::CreatePCB(char c)
 
 void Kernel::InsertPCB(char c)
 {
-	if (!CharExists(c))
+	if (!this->CharExists(c))
 	{
 		PCB *nuevo = CreatePCB(c);
 		if (this->Head == NULL)
@@ -69,7 +83,7 @@ void Kernel::InsertPCB(char c)
 		else
 		{
 			this->Tail->next = nuevo;
-			this->Tail = nuevo;
+			this->Tail = this->Tail->next;
 		}
 	}
 }
@@ -79,7 +93,7 @@ bool Kernel::CharExists(char c)
 	PCB *iterator = this->Head;
 	while (iterator != NULL)
 	{
-		if (iterator->c = c)
+		if (iterator->c == c)
 		{
 			return true;
 		}
@@ -102,11 +116,11 @@ void Kernel::PausePCB(char c)
 	}
 }
 
-void Kernel::ExectutePCB(PCB *nodo)
+void Kernel::ExectutePCB(PCB *nodo, int x)
 {
-	typedef int(*Function)(char, unsigned long);
+	typedef void(*Function)(char, unsigned long, int);
 	Function DoFunction = (Function)*(&nodo->instruction);
-	DoFunction(nodo->c, nodo->quantum);
+	DoFunction(nodo->c, nodo->quantum, x);
 }
 
 void Kernel::ChangeQuantum(char c, unsigned long newquantum)
@@ -155,4 +169,26 @@ bool Kernel::DeletePCB(char c)
 		}
 		return false;
 	}
+}
+
+void Kernel::ExecuteSO()
+{
+	InsertPCB('a');
+	InsertPCB('b');
+	InsertPCB('c');
+	InsertPCB('d');
+	InsertPCB('e');
+	InsertPCB('f');
+	PCB*iterator = this->Head;
+	short x = 0;
+	while (iterator != NULL)
+	{
+		if (iterator->status != PAUSE)
+		{
+			ExectutePCB(iterator, x);
+		}
+		x++;
+		iterator = iterator->next;
+	}
+	this->ExecuteSO();
 }
