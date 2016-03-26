@@ -1,12 +1,18 @@
 #include "stdafx.h"
 #include "Kernel.h"
 #include <iostream>
+#include <algorithm>
+#include <conio.h>
+#include <Windows.h>
 
 Kernel::Kernel()
 {
 	this->Head == NULL;
 	this->Tail == NULL;
 	this->idcounter = 0;
+	this->poscommandy = 5;
+	this->poscommandx = 0;
+	this->command = "";
 }
 
 Kernel::~Kernel()
@@ -31,19 +37,67 @@ void Kernel::StaticFunction(char c, unsigned long q, short x)
 	{
 		if (!temp->isTimeout(q))
 		{
-			//LamarMetodo()
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { x, 0 });
 			cout << " ";
 			break;
 		}
+		
+	}
+}
+
+void Kernel::KeywordChange()
+{
+	Timer *temp = new Timer();
+	temp->Start();
+	cout << "llego";
+	while (!temp->isTimeout(20000))
+	{
+		cout << "entro";
+		if (_kbhit())
+		{
+			int c = _getch();
+			if (c == 43)
+			{
+				exit(0);
+			}
+			if (c == 13)
+			{
+				AnaliceCommand();
+				this->command = "";
+				break;
+			}
+			if ((c > 96 && c < 122) || (c>47 && c < 58) || c == ' ')
+			{
+				cout << this->command;
+				char x = (char)c;
+				this->command += x;
+				SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { this->poscommandx, this->poscommandy });
+				cout << x;
+				poscommandx++;
+			}
+		}
+		else
+		{
+			break;
+		}
+		/*
+		char x = (char)_getch();
+		
 		if (GetAsyncKeyState(VK_ADD) & 0x8000) //VK_ADD ascii of '+'
 		{
-			//string++;
-			//if(enter)
-			//{ AgregarProcesoNuevo() }
-
 			exit(0);
 		}
+		if (GetKeyState(VK_RETURN) & 0x8000) //Virtual key for enter
+		{
+			AnaliceCommand();
+			this->command = "";
+			break;
+		}
+			char x = (char)_getch();
+			this->command += x;
+			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { this->poscommandx, this->poscommandy });
+			cout << x;
+			poscommandx++;*/
 	}
 }
 
@@ -175,20 +229,61 @@ void Kernel::ExecuteSO()
 {
 	InsertPCB('a');
 	InsertPCB('b');
-	InsertPCB('c');
-	InsertPCB('d');
-	InsertPCB('e');
-	InsertPCB('f');
-	PCB*iterator = this->Head;
-	short x = 0;
-	while (iterator != NULL)
+	while (true)
 	{
-		if (iterator->status != PAUSE)
+		PCB*iterator = this->Head;
+		short x = 0;
+		while (iterator != NULL)
 		{
-			ExectutePCB(iterator, x);
+			if (iterator->status != PAUSE)
+			{
+				ExectutePCB(iterator, x);
+			}
+			x++;
+			iterator = iterator->next;
 		}
-		x++;
-		iterator = iterator->next;
+		KeywordChange();
 	}
-	this->ExecuteSO();
+}
+
+void Kernel::AnaliceCommand()
+{
+	int x = this->command.find(' ');
+	transform(this->command.begin(), this->command.end(), this->command.begin(), ::tolower);
+	try
+	{
+		string delimiter = " ";
+		string token = command.substr(0, command.find(delimiter));
+		//add, pause, remove, quantum
+		if (token == "add")
+		{
+			string resto = command.substr(command.find_first_of(delimiter) + 1, command.length() - 1);
+			char c = resto[0];
+			InsertPCB(c);
+		}
+		else if (token == "pause")
+		{
+			string resto = command.substr(command.find_first_of(delimiter) + 1, command.length() - 1);
+			char c = resto[0];
+			PausePCB(c);
+		}
+		else if (token == "remove")
+		{
+			string resto = command.substr(command.find_first_of(delimiter) + 1, command.length() - 1);
+			char c = resto[0];
+			DeletePCB(c);
+		}
+		else if (token == "quantum")
+		{
+			string resto = command.substr(command.find_first_of(delimiter) + 1, command.length() - 1);
+			char c = resto[0];
+			resto = resto.substr(resto.find_first_of(delimiter) + 1, resto.length() - 1);
+			long quantum = stoi(resto);
+			ChangeQuantum(c, quantum);
+		}
+	}
+	catch (exception e)
+	{
+
+	}
 }

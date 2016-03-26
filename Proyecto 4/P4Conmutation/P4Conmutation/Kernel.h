@@ -3,6 +3,8 @@
 #include "Timer.h"
 #include <iostream>
 #include <Windows.h>
+#include <conio.h>
+#include <string>
 
 using namespace std;
 
@@ -14,8 +16,10 @@ public:
 	//Variables
 	PCB *Tail, *Head;
 	const unsigned long quantum = 1;
+	short poscommandx, poscommandy;
 	int idcounter;
-
+	string command;
+	
 	//Methods
 	Kernel();
 	~Kernel();
@@ -41,6 +45,10 @@ public:
 	PCB *CreatePCB(char c);
 
 	void PausePCB(char c);
+
+	void KeywordChange();
+
+	void AnaliceCommand();
 
 };
 
