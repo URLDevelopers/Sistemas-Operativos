@@ -41,7 +41,7 @@ void Kernel::StaticFunction(char c, unsigned long q, short x)
 			cout << " ";
 			break;
 		}
-		
+
 	}
 }
 
@@ -49,55 +49,32 @@ void Kernel::KeywordChange()
 {
 	Timer *temp = new Timer();
 	temp->Start();
-	cout << "llego";
-	while (!temp->isTimeout(20000))
+	if (_kbhit() != 0)
 	{
-		cout << "entro";
-		if (_kbhit())
-		{
-			int c = _getch();
-			if (c == 43)
-			{
-				exit(0);
-			}
-			if (c == 13)
-			{
-				AnaliceCommand();
-				this->command = "";
-				break;
-			}
-			if ((c > 96 && c < 122) || (c>47 && c < 58) || c == ' ')
-			{
-				cout << this->command;
-				char x = (char)c;
-				this->command += x;
-				SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { this->poscommandx, this->poscommandy });
-				cout << x;
-				poscommandx++;
-			}
-		}
-		else
-		{
-			break;
-		}
-		/*
-		char x = (char)_getch();
-		
-		if (GetAsyncKeyState(VK_ADD) & 0x8000) //VK_ADD ascii of '+'
+		int c = _getch();
+		if (c == 43) //+
 		{
 			exit(0);
 		}
-		if (GetKeyState(VK_RETURN) & 0x8000) //Virtual key for enter
+		else if (c == 13) //enter
 		{
 			AnaliceCommand();
+			for (int i = 0; i < this->command.length(); i++)
+			{
+				SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { (short)i, this->poscommandy });
+				cout << " ";
+			}
 			this->command = "";
-			break;
+			this->poscommandx = 0;
 		}
-			char x = (char)_getch();
+		else if ((c > 96 && c < 122) || (c > 47 && c < 58) || c == ' ')
+		{
+			char x = (char)c;
 			this->command += x;
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { this->poscommandx, this->poscommandy });
 			cout << x;
-			poscommandx++;*/
+			poscommandx++;
+		}
 	}
 }
 
@@ -161,7 +138,7 @@ void Kernel::PausePCB(char c)
 	PCB *iterator = this->Head;
 	while (iterator != NULL)
 	{
-		if (iterator->c = c)
+		if (iterator->c == c)
 		{
 			iterator->status = PAUSE;
 			break;
@@ -182,7 +159,7 @@ void Kernel::ChangeQuantum(char c, unsigned long newquantum)
 	PCB *iterator = this->Head;
 	while (iterator != NULL)
 	{
-		if (iterator->c = c)
+		if (iterator->c == c)
 		{
 			iterator->quantum = newquantum;
 			break;
@@ -196,8 +173,8 @@ bool Kernel::DeletePCB(char c)
 	PCB *iterator = this->Head;
 	if (this->Head->c == c)
 	{
-		this->Head == this->Head->next;
-		iterator == NULL;
+		this->Head = this->Head->next;
+		iterator = NULL;
 		return true;
 	}
 	else
@@ -211,7 +188,7 @@ bool Kernel::DeletePCB(char c)
 				return true;
 			}
 			prev = iterator;
-			iterator == iterator->next;
+			iterator = iterator->next;
 		}
 		if (iterator == this->Tail)
 		{
@@ -227,8 +204,6 @@ bool Kernel::DeletePCB(char c)
 
 void Kernel::ExecuteSO()
 {
-	InsertPCB('a');
-	InsertPCB('b');
 	while (true)
 	{
 		PCB*iterator = this->Head;
@@ -284,6 +259,6 @@ void Kernel::AnaliceCommand()
 	}
 	catch (exception e)
 	{
-
+		this->command == "";
 	}
 }
