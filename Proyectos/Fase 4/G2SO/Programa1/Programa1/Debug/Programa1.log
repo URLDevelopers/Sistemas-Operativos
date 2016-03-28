@@ -1,0 +1,6 @@
+﻿  stdafx.cpp
+  Programa1.cpp
+c:\users\pablo\dropbox\url\ing en informatica y sistemas\séptimo ciclo 2016\sistemas operativos\g2so\programa1\programa1\programa1.cpp(344): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pablo\dropbox\url\ing en informatica y sistemas\séptimo ciclo 2016\sistemas operativos\g2so\programa1\programa1\programa1.cpp(391): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pablo\dropbox\url\ing en informatica y sistemas\séptimo ciclo 2016\sistemas operativos\g2so\programa1\programa1\programa1.cpp(405): warning C4018: '<': no coinciden signed/unsigned
+  Programa1.vcxproj -> C:\Users\Pablo\Dropbox\URL\ING EN INFORMATICA Y SISTEMAS\Séptimo Ciclo 2016\Sistemas Operativos\G2SO\Programa1\Debug\Programa1.exe
