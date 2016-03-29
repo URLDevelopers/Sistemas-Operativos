@@ -19,7 +19,7 @@ void Timer::Start()
 
 unsigned long Timer::elapsedTime()
 {
-	return ((unsigned long)clock() - begTime) / CLOCKS_PER_SEC;
+	return ((unsigned long)clock() - begTime) / (CLOCKS_PER_SEC/1000);
 }
 
 bool Timer::isTimeout(unsigned long seconds)

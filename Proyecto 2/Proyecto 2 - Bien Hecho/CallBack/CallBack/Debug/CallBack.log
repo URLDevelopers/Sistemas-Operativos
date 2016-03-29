@@ -1,2 +1,3 @@
-﻿  CallBack.cpp
+﻿  Kernel.cpp
+c:\users\francisco\documents\github\sistemas-operativos\proyecto 2\proyecto 2 - bien hecho\callback\callback\kernel.cpp(228): warning C4717: 'Kernel::EjecutarSistemaOperativo': recursive on all control paths, function will cause runtime stack overflow
   CallBack.vcxproj -> C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 2\Proyecto 2 - Bien Hecho\CallBack\Debug\CallBack.exe

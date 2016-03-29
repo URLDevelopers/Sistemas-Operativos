@@ -1,0 +1,2 @@
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1.Windows\App1.Windows.csproj;neutral
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\App1.csproj;neutral

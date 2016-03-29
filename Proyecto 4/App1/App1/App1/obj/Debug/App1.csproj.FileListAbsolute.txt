@@ -1,0 +1,11 @@
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\bin\Debug\App1.dll
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\bin\Debug\App1.pdb
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\bin\Debug\Xamarin.Forms.Core.dll
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\bin\Debug\Xamarin.Forms.Platform.dll
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\bin\Debug\Xamarin.Forms.Xaml.dll
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\bin\Debug\Xamarin.Forms.Core.xml
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\bin\Debug\Xamarin.Forms.Xaml.xml
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\obj\Debug\App1.csprojResolveAssemblyReference.cache
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\obj\Debug\App1.Intefaz.xaml.g.cs
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\obj\Debug\App1.dll
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\App1\App1\App1\obj\Debug\App1.pdb
