@@ -1,0 +1,6 @@
+c:\users\desarrollador2\documents\visual studio 2013\Projects\Lock\Lock\bin\Debug\Lock.exe.config
+c:\users\desarrollador2\documents\visual studio 2013\Projects\Lock\Lock\bin\Debug\Lock.exe
+c:\users\desarrollador2\documents\visual studio 2013\Projects\Lock\Lock\bin\Debug\Lock.pdb
+c:\users\desarrollador2\documents\visual studio 2013\Projects\Lock\Lock\obj\Debug\Lock.csprojResolveAssemblyReference.cache
+c:\users\desarrollador2\documents\visual studio 2013\Projects\Lock\Lock\obj\Debug\Lock.exe
+c:\users\desarrollador2\documents\visual studio 2013\Projects\Lock\Lock\obj\Debug\Lock.pdb
