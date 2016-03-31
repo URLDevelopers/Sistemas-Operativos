@@ -208,16 +208,18 @@ void Kernel::ExecuteSO()
 	{
 		PCB*iterator = this->Head;
 		short x = 0;
+		KeywordChange();
 		while (iterator != NULL)
 		{
 			if (iterator->status != PAUSE)
 			{
 				ExectutePCB(iterator, x);
 			}
+			KeywordChange();
 			x++;
 			iterator = iterator->next;
 		}
-		KeywordChange();
+		//KeywordChange();
 	}
 }
 
