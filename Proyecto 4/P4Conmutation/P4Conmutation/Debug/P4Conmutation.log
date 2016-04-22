@@ -4,4 +4,5 @@ c:\program files (x86)\windows kits\8.1\include\um\winnt.h(9107): warning C4005:
 c:\users\francisco\documents\github\sistemas-operativos\proyecto 4\p4conmutation\p4conmutation\kernel.cpp(10): warning C4553: '==': operator has no effect; did you intend '='?
 c:\users\francisco\documents\github\sistemas-operativos\proyecto 4\p4conmutation\p4conmutation\kernel.cpp(11): warning C4553: '==': operator has no effect; did you intend '='?
 c:\users\francisco\documents\github\sistemas-operativos\proyecto 4\p4conmutation\p4conmutation\kernel.cpp(62): warning C4018: '<': signed/unsigned mismatch
+  LINK : C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\P4Conmutation\Debug\P4Conmutation.exe not found or not built by the last incremental link; performing full link
   P4Conmutation.vcxproj -> C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Proyecto 4\P4Conmutation\Debug\P4Conmutation.exe
