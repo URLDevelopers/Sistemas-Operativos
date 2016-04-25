@@ -3,3 +3,6 @@ c:\users\francisco\documents\visual studio 2015\Projects\Worker\Worker\bin\Debug
 c:\users\francisco\documents\visual studio 2015\Projects\Worker\Worker\bin\Debug\Worker.pdb
 c:\users\francisco\documents\visual studio 2015\Projects\Worker\Worker\obj\Debug\Worker.exe
 c:\users\francisco\documents\visual studio 2015\Projects\Worker\Worker\obj\Debug\Worker.pdb
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Worker\Worker\bin\Debug\Worker.exe.config
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Worker\Worker\obj\Debug\Worker.exe
+C:\Users\Francisco\Documents\GitHub\Sistemas-Operativos\Worker\Worker\obj\Debug\Worker.pdb
