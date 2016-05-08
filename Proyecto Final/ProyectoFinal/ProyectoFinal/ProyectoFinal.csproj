@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cola.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +65,31 @@
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmarthThreadPool\CallerThreadContext.cs" />
+    <Compile Include="SmarthThreadPool\CanceledWorkItemsGroup.cs" />
+    <Compile Include="SmarthThreadPool\EventWaitHandle.cs" />
+    <Compile Include="SmarthThreadPool\EventWaitHandleFactory.cs" />
+    <Compile Include="SmarthThreadPool\Exceptions.cs" />
+    <Compile Include="SmarthThreadPool\Interfaces.cs" />
+    <Compile Include="SmarthThreadPool\InternalInterfaces.cs" />
+    <Compile Include="SmarthThreadPool\PriorityQueue.cs" />
+    <Compile Include="SmarthThreadPool\SLExt.cs" />
+    <Compile Include="SmarthThreadPool\SmartThreadPool.cs" />
+    <Compile Include="SmarthThreadPool\SmartThreadPool.ThreadEntry.cs" />
+    <Compile Include="SmarthThreadPool\Stopwatch.cs" />
+    <Compile Include="SmarthThreadPool\STPEventWaitHandle.cs" />
+    <Compile Include="SmarthThreadPool\STPPerformanceCounter.cs" />
+    <Compile Include="SmarthThreadPool\STPStartInfo.cs" />
+    <Compile Include="SmarthThreadPool\SynchronizedDictionary.cs" />
+    <Compile Include="SmarthThreadPool\WIGStartInfo.cs" />
+    <Compile Include="SmarthThreadPool\WorkItem.cs" />
+    <Compile Include="SmarthThreadPool\WorkItem.WorkItemResult.cs" />
+    <Compile Include="SmarthThreadPool\WorkItemFactory.cs" />
+    <Compile Include="SmarthThreadPool\WorkItemInfo.cs" />
+    <Compile Include="SmarthThreadPool\WorkItemResultTWrapper.cs" />
+    <Compile Include="SmarthThreadPool\WorkItemsGroup.cs" />
+    <Compile Include="SmarthThreadPool\WorkItemsGroupBase.cs" />
+    <Compile Include="SmarthThreadPool\WorkItemsQueue.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -90,6 +116,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
